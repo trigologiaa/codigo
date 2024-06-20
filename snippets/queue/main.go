@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	q := queue.New[int]()
+	q := queue.NewQueue[int]()
 	fmt.Println("q.IsEmpty() -> ", q.IsEmpty())
 	fmt.Println("Encolando... 1, 2 y 3")
 	q.Enqueue(1)

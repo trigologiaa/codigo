@@ -8,7 +8,7 @@ import (
 )
 
 func InvertirCadena(cadena string) string {
-	s := *stack.New[string]()
+	s := *stack.NewStack[string]()
 	salida := ""
 	for _, c := range cadena {
 		s.Push(string(c))

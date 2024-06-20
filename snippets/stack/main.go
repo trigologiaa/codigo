@@ -7,7 +7,7 @@ import (
 
 func main() {
 	// Crear una nueva pila de enteros
-	s := stack.New[int]()
+	s := stack.NewStack[int]()
 	// Agregar elementos a la pila
 	s.Push(1)
 	s.Push(2)

@@ -27,7 +27,7 @@ func Balanceada(cadena string) bool {
 	parcito.Put(")", "(")
 	parcito.Put("]", "[")
 	parcito.Put("}", "{")
-	s := stack.New[string]()
+	s := stack.NewStack[string]()
 	for _, c := range cadena {
 		c := string(c)
 		if deAbrir.Contains(c) {
