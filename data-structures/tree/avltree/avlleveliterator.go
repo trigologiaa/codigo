@@ -2,8 +2,8 @@ package avltree
 
 import (
 	"errors"
-	"data-structures/queue"
-	"data-structures/types"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/queue"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/types"
 )
 
 type AVLLevelIterator[T types.Ordered] struct {

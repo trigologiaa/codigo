@@ -2,8 +2,8 @@ package avltree
 
 import (
 	"fmt"
-	"data-structures/types"
-	"data-structures/utils"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/types"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/utils"
 )
 
 // AVLNode es un nodo del árbol AVL, además del dato y los hijos, registra la altura.

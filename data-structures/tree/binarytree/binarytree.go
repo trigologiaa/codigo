@@ -2,8 +2,8 @@
 package binarytree
 
 import (
-	"data-structures/stack"
-	"data-structures/types"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/stack"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/types"
 )
 
 type BinaryTree[T types.Ordered] struct {

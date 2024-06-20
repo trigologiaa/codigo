@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"taller-GO/08-arreglos/arreglos"
+	"github.com/trigologiaa/codigo/tree/main/taller-GO/08-arreglos/arreglos"
 )
 
 func main() {

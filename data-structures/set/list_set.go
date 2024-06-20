@@ -4,7 +4,7 @@ package set
 
 import (
 	"fmt"
-	"data-structures/list"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/list"
 )
 
 // ListSet implementa un conjunto sobre una lista enlazada simple.

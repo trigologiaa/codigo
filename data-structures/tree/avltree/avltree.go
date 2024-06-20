@@ -3,7 +3,7 @@ package avltree
 
 import (
 	"errors"
-	"data-structures/types"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/types"
 )
 
 type AVLTree[T types.Ordered] struct {

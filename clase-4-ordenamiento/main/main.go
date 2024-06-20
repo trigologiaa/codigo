@@ -6,8 +6,8 @@ import (
 	"strings"
 	ui "github.com/gizak/termui/v3"
 	"github.com/gizak/termui/v3/widgets"
-	"clase-4-ordenamiento/slice"
-	"clase-4-ordenamiento/sort"
+	"github.com/trigologiaa/codigo/tree/main/clase-4-ordenamiento/slice"
+	"github.com/trigologiaa/codigo/tree/main/clase-4-ordenamiento/sort"
 )
 
 // Parametros de la visualización. Cambiar a gusto

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	bitmap "github.com/trigologiaa/codigo/data-structures/bitmap"
+	bitmap "github.com/trigologiaa/codigo/tree/main/data-structures"
 )
 
 func main() {

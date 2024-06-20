@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"strings"
-	"data-structures/stack"
-	"data-structures/types"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/stack"
+	"github.com/trigologiaa/codigo/tree/main/data-structures/types"
 )
 
 type BinarySearchTree[T types.Ordered] struct {
