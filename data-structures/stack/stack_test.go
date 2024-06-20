@@ -5,48 +5,48 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewStack(t *testing.T) {
-	s := NewStack[int]()
-	assert.NotNil(t, s)
+func TestPilaNueva(test *testing.T) {
+	pila := NuevaPila[int]()
+	assert.NotNil(test, pila)
 }
 
-func TestStackPush(t *testing.T) {
-	s := NewStack[int]()
-	s.Push(1)
-	assert.False(t, s.IsEmpty())
+func TestPilaEmpujar(test *testing.T) {
+	pila := NuevaPila[int]()
+	pila.Empujar(1)
+	assert.False(test, pila.EstaVacia())
 }
 
-func TestStackTop(t *testing.T) {
-	s := NewStack[int]()
-	s.Push(1)
-	v, err := s.Top()
-	assert.Equal(t, 1, v)
-	assert.NoError(t, err)
+func TestPilaTope(test *testing.T) {
+	pila := NuevaPila[int]()
+	pila.Empujar(1)
+	valor, err := pila.Tope()
+	assert.Equal(test, 1, valor)
+	assert.NoError(test, err)
 }
 
-func TestStackTopWhenEmpty(t *testing.T) {
-	s := NewStack[int]()
-	_, err := s.Top()
-	assert.EqualError(t, err, "pila vacía")
+func TestPilaTopeCuandoEstaVacia(test *testing.T) {
+	pila := NuevaPila[int]()
+	_, err := pila.Tope()
+	assert.EqualError(test, err, "pila vacía")
 }
 
-func TestStackPop(t *testing.T) {
-	s := NewStack[int]()
-	s.Push(1)
-	v, err := s.Pop()
-	assert.Equal(t, 1, v)
-	assert.NoError(t, err)
+func TestPilaTirar(test *testing.T) {
+	pila := NuevaPila[int]()
+	pila.Empujar(1)
+	valor, err := pila.Tirar()
+	assert.Equal(test, 1, valor)
+	assert.NoError(test, err)
 }
 
-func TestStackPopWhenEmpty(t *testing.T) {
-	s := NewStack[int]()
-	_, err := s.Pop()
-	assert.EqualError(t, err, "pila vacía")
+func TestPilaTirarCuandoEstaVacia(test *testing.T) {
+	pila := NuevaPila[int]()
+	_, err := pila.Tirar()
+	assert.EqualError(test, err, "pila vacía")
 }
 
-func TestStackIsEmpty(t *testing.T) {
-	s := NewStack[int]()
-	assert.True(t, s.IsEmpty())
-	s.Push(1)
-	assert.False(t, s.IsEmpty())
+func TestPilaEstaVacia(test *testing.T) {
+	pila := NuevaPila[int]()
+	assert.True(test, pila.EstaVacia())
+	pila.Empujar(1)
+	assert.False(test, pila.EstaVacia())
 }

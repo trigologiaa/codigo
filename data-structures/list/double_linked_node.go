@@ -1,53 +1,53 @@
 package list
 
-// DoubleLinkedNode representa un nodo de una lista enlazada doble.
-type DoubleLinkedNode[T comparable] struct {
-	data T
-	next *DoubleLinkedNode[T]
-	prev *DoubleLinkedNode[T]
+// DobleNodoEnlazado representa un nodo de una lista enlazada doble.
+type DobleNodoEnlazado[T comparable] struct {
+	dato 		T
+	siguiente	*DobleNodoEnlazado[T]
+	anterior 	*DobleNodoEnlazado[T]
 }
 
-// NewDoubleLinkedNode crea un nuevo nodo de lista enlazada doble con el dato especificado.
-func NewDoubleLinkedNode[T comparable](data T) *DoubleLinkedNode[T] {
-	return &DoubleLinkedNode[T]{data: data}
+// NuevoDobleNodoEnlazado crea un nuevo nodo de lista enlazada doble con el dato especificado.
+func NuevoDobleNodoEnlazado[T comparable](dato T) *DobleNodoEnlazado[T] {
+	return &DobleNodoEnlazado[T]{dato: dato}
 }
 
-// SetData establece el dato almacenado en el nodo.
-func (n *DoubleLinkedNode[T]) SetData(data T) {
-	n.data = data
+// EstablecerDato establece el dato almacenado en el nodo.
+func (nodo *DobleNodoEnlazado[T]) EstablecerDato(dato T) {
+	nodo.dato = dato
 }
 
-// Data devuelve el dato almacenado en el nodo.
-func (n *DoubleLinkedNode[T]) Data() T {
-	return n.data
+// Dato devuelve el dato almacenado en el nodo.
+func (nodo *DobleNodoEnlazado[T]) Dato() T {
+	return nodo.dato
 }
 
-// SetNext establece el nodo siguiente al nodo actual.
-func (n *DoubleLinkedNode[T]) SetNext(next *DoubleLinkedNode[T]) {
-	n.next = next
+// EstablecerSiguiente establece el nodo siguiente al nodo actual.
+func (nodo *DobleNodoEnlazado[T]) EstablecerSiguiente(siguiente *DobleNodoEnlazado[T]) {
+	nodo.siguiente = siguiente
 }
 
-// Next devuelve el nodo siguiente al nodo actual.
-func (n *DoubleLinkedNode[T]) Next() *DoubleLinkedNode[T] {
-	return n.next
+// Siguiente devuelve el nodo siguiente al nodo actual.
+func (nodo *DobleNodoEnlazado[T]) Siguiente() *DobleNodoEnlazado[T] {
+	return nodo.siguiente
 }
 
-// HasNext devuelve true si el nodo actual tiene asignado un nodo siguiente.
-func (n *DoubleLinkedNode[T]) HasNext() bool {
-	return n.next != nil
+// TieneSiguiente devuelve true si el nodo actual tiene asignado un nodo siguiente.
+func (nodo *DobleNodoEnlazado[T]) TieneSiguiente() bool {
+	return nodo.siguiente != nil
 }
 
-// SetPrev establece el nodo anterior al nodo actual.
-func (n *DoubleLinkedNode[T]) SetPrev(newPrev *DoubleLinkedNode[T]) {
-	n.prev = newPrev
+// EstablecerAnterior establece el nodo anterior al nodo actual.
+func (nodo *DobleNodoEnlazado[T]) EstablecerAnterior(nuevoAnterior *DobleNodoEnlazado[T]) {
+	nodo.anterior = nuevoAnterior
 }
 
-// Prev devuelve el nodo anterior al nodo actual.
-func (n *DoubleLinkedNode[T]) Prev() *DoubleLinkedNode[T] {
-	return n.prev
+// Anterior devuelve el nodo anterior al nodo actual.
+func (nodo *DobleNodoEnlazado[T]) Anterior() *DobleNodoEnlazado[T] {
+	return nodo.anterior
 }
 
-// HasPrev devuelve true si el nodo actual tiene asignado un nodo previo.
-func (n *DoubleLinkedNode[T]) HasPrev() bool {
-	return n.prev != nil
+// TieneAnterior devuelve true si el nodo actual tiene asignado un nodo previo.
+func (nodo *DobleNodoEnlazado[T]) TieneAnterior() bool {
+	return nodo.anterior != nil
 }

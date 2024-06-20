@@ -6,8 +6,8 @@ import (
 	"github.com/trigologiaa/codigo/data-structures/types"
 )
 
-type AVLTree[T types.Ordered] struct {
-	root *AVLNode[T]
+type AVLTree[T types.Ordenado] struct {
+	root *AVLNodo[T]
 }
 
 // NewAVLTree crea un árbol AVL vacío.
@@ -18,7 +18,7 @@ type AVLTree[T types.Ordered] struct {
 //
 // Retorna:
 //   - un puntero a un árbol AVL vacío.
-func NewAVLTree[T types.Ordered]() *AVLTree[T] {
+func NewAVLTree[T types.Ordenado]() *AVLTree[T] {
 	return &AVLTree[T]{root: nil}
 }
 
@@ -47,7 +47,7 @@ func (avl *AVLTree[T]) String() string {
 //
 // Retorna:
 //   - la raíz del árbol AVL.
-func (avl *AVLTree[T]) GetRoot() *AVLNode[T] {
+func (avl *AVLTree[T]) GetRoot() *AVLNodo[T] {
 	return avl.root
 }
 
@@ -217,19 +217,19 @@ func (avl *AVLTree[T]) InOrder() string {
 	return avl.root.inOrder()
 }
 
-// Iterator devuelve un iterador para recorrer el árbol AVL en orden.
+// Iterador devuelve un iterador para recorrer el árbol AVL en orden.
 //
 // Uso:
 //
 //	avl := avltree.NewAVLTree[int]()
 //	// ...
-//	iterator := avl.Iterator()
+//	iterator := avl.Iterador()
 //	for iterator.HasNext() {
 //		fmt.Println(iterator.Next())
 //	}
 //
 // Retorna:
 //   - un iterador para recorrer el árbol AVL en orden.
-func (avl *AVLTree[T]) Iterator() types.Iterator[T] {
-	return NewAVLInOrderIterator[T](avl.root)
+func (avl *AVLTree[T]) Iterador() types.Iterador[T] {
+	return NewAVLInOrderIterador[T](avl.root)
 }

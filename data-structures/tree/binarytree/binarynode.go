@@ -9,8 +9,8 @@ import (
 
 // BinaryNode implementa el tipo BinaryNode con dos campos de tipo
 // *BinaryNode que son punteros a los hijos izquierdo y derecho, tambien de tipo BinaryNode,
-// y un tercer campo de tipo T generico pero Ordered, por compatibilidad con BinarySerchTree.
-type BinaryNode[T types.Ordered] struct {
+// y un tercer campo de tipo T generico pero Ordenado, por compatibilidad con BinarySerchTree.
+type BinaryNode[T types.Ordenado] struct {
 	left  *BinaryNode[T]
 	right *BinaryNode[T]
 	data  T
@@ -29,7 +29,7 @@ type BinaryNode[T types.Ordered] struct {
 //
 // Retorna:
 //   - un puntero a un nuevo BinaryNode.
-func NewBinaryNode[T types.Ordered](
+func NewBinaryNode[T types.Ordenado](
 	data T,
 	left *BinaryNode[T],
 	right *BinaryNode[T],

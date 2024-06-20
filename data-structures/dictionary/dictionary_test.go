@@ -6,103 +6,103 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestNewDictionary(t *testing.T) {
-	dict := NewDictionary[int, int]()
-	assert.NotNil(t, dict)
-	assert.Equal(t, 0, dict.Size())
+func TestNuevoDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[int, int]()
+	assert.NotNil(test, diccionario)
+	assert.Equal(test, 0, diccionario.Tamaño())
 }
 
-func TestDictionaryContains(t *testing.T) {
-	dict := NewDictionary[string, int]()
-	dict.Put("Leo", 55)
-	dict.Put("Lucas", 38)
-	assert.True(t, dict.Contains("Leo"))
-	assert.True(t, dict.Contains("Lucas"))
-	assert.False(t, dict.Contains("Fede"))
+func TestContieneElDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[string, int]()
+	diccionario.Insertar("Leo", 55)
+	diccionario.Insertar("Lucas", 38)
+	assert.True(test, diccionario.Contiene("Leo"))
+	assert.True(test, diccionario.Contiene("Lucas"))
+	assert.False(test, diccionario.Contiene("Fede"))
 }
 
-func TestDictionaryPut(t *testing.T) {
-	dict := NewDictionary[string, int]()
-	dict.Put("Leo", 55)
-	dict.Put("Lucas", 38)
-	assert.Equal(t, 2, dict.Size())
+func TestInsertarEnDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[string, int]()
+	diccionario.Insertar("Leo", 55)
+	diccionario.Insertar("Lucas", 38)
+	assert.Equal(test, 2, diccionario.Tamaño())
 }
 
-func TestDictionaryPutReplace(t *testing.T) {
-	dict := NewDictionary[string, int]()
-	dict.Put("Leo", 55)
-	dict.Put("Leo", 38)
-	assert.Equal(t, 1, dict.Size())
-	value, _ := dict.Get("Leo")
-	assert.Equal(t, 38, value)
+func TestInsertarYReemplazarEnDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[string, int]()
+	diccionario.Insertar("Leo", 55)
+	diccionario.Insertar("Leo", 38)
+	assert.Equal(test, 1, diccionario.Tamaño())
+	valor, _ := diccionario.Obtener("Leo")
+	assert.Equal(test, 38, valor)
 }
 
-func TestDictionaryGet(t *testing.T) {
-	dict := NewDictionary[string, int]()
-	dict.Put("Lucas", 35)
-	value, err := dict.Get("Lucas")
-	assert.Equal(t, 35, value)
-	require.NoError(t, err)
-	value, err = dict.Get("Fede")
-	assert.Equal(t, 0, value)
-	assert.EqualError(t, err, "clave inexistente")
+func TestObtenerDeDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[string, int]()
+	diccionario.Insertar("Lucas", 35)
+	valor, err := diccionario.Obtener("Lucas")
+	assert.Equal(test, 35, valor)
+	require.NoError(test, err)
+	valor, err = diccionario.Obtener("Fede")
+	assert.Equal(test, 0, valor)
+	assert.EqualError(test, err, "clave inexistente")
 }
 
-func TestDictionaryRemove(t *testing.T) {
-	dict := NewDictionary[string, int]()
-	dict.Put("Leo", 55)
-	dict.Put("Lucas", 38)
-	assert.Equal(t, 2, dict.Size())
-	dict.Remove("Leo")
-	assert.Equal(t, 1, dict.Size())
-	assert.True(t, dict.Contains("Lucas"))
-	assert.False(t, dict.Contains("Leo"))
+func TestRemoverDeDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[string, int]()
+	diccionario.Insertar("Leo", 55)
+	diccionario.Insertar("Lucas", 38)
+	assert.Equal(test, 2, diccionario.Tamaño())
+	diccionario.Remover("Leo")
+	assert.Equal(test, 1, diccionario.Tamaño())
+	assert.True(test, diccionario.Contiene("Lucas"))
+	assert.False(test, diccionario.Contiene("Leo"))
 }
 
-func TestDictionaryRemoveNotExists(t *testing.T) {
-	dict := NewDictionary[string, int]()
-	dict.Put("Leo", 55)
-	dict.Put("Lucas", 38)
-	assert.Equal(t, 2, dict.Size())
-	dict.Remove("Fede")
-	assert.Equal(t, 2, dict.Size())
+func TestRemoverNoExistenteDeDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[string, int]()
+	diccionario.Insertar("Leo", 55)
+	diccionario.Insertar("Lucas", 38)
+	assert.Equal(test, 2, diccionario.Tamaño())
+	diccionario.Remover("Fede")
+	assert.Equal(test, 2, diccionario.Tamaño())
 }
 
-func TestDictionarySize(t *testing.T) {
-	dict := NewDictionary[string, int]()
-	dict.Put("Leo", 55)
-	dict.Put("Lucas", 38)
-	assert.Equal(t, 2, dict.Size())
+func TestTamañoDeDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[string, int]()
+	diccionario.Insertar("Leo", 55)
+	diccionario.Insertar("Lucas", 38)
+	assert.Equal(test, 2, diccionario.Tamaño())
 }
 
-func TestDictionaryValues(t *testing.T) {
-	dic := NewDictionary[int, int]()
-	dic.Put(1, 2)
-	dic.Put(3, 4)
-	dic.Put(5, 6)
-	assert.ElementsMatch(t, []int{6, 4, 2}, dic.Values())
+func TestValoresDeDiccionario(test *testing.T) {
+	dic := NuevoDiccionario[int, int]()
+	dic.Insertar(1, 2)
+	dic.Insertar(3, 4)
+	dic.Insertar(5, 6)
+	assert.ElementsMatch(test, []int{6, 4, 2}, dic.Valores())
 }
 
-func TestDictionaryKeys(t *testing.T) {
-	dict := NewDictionary[int, int]()
-	dict.Put(1, 2)
-	dict.Put(3, 4)
-	dict.Put(5, 6)
-	assert.ElementsMatch(t, []int{1, 5, 3}, dict.Keys())
+func TestClavesDeDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[int, int]()
+	diccionario.Insertar(1, 2)
+	diccionario.Insertar(3, 4)
+	diccionario.Insertar(5, 6)
+	assert.ElementsMatch(test, []int{1, 5, 3}, diccionario.Claves())
 }
 
-func TestDictionaryStringOnEmptyDictionary(t *testing.T) {
-	dict := NewDictionary[int, int]()
-	assert.Equal(t, "Dictionary: {}", dict.String())
+func TestStringDeDiccionarioVacio(test *testing.T) {
+	diccionario := NuevoDiccionario[int, int]()
+	assert.Equal(test, "Diccionario: {}", diccionario.String())
 }
 
-func TestDictionaryString(t *testing.T) {
-	dict := NewDictionary[int, int]()
-	dict.Put(1, 2)
-	dict.Put(3, 4)
-	possibleRepresentations := []string{
-		"Dictionary: {\n  1: 2\n  3: 4\n}",
-		"Dictionary: {\n  3: 4\n  1: 2\n}",
+func TestStringDeDiccionario(test *testing.T) {
+	diccionario := NuevoDiccionario[int, int]()
+	diccionario.Insertar(1, 2)
+	diccionario.Insertar(3, 4)
+	posiblesRepresentaciones := []string{
+		"Diccionario: {\n  1: 2\n  3: 4\n}",
+		"Diccionario: {\n  3: 4\n  1: 2\n}",
 	}
-	assert.Contains(t, possibleRepresentations, dict.String())
+	assert.Contains(test, posiblesRepresentaciones, diccionario.String())
 }

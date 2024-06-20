@@ -5,182 +5,182 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewCircularList(t *testing.T) {
-	list := NewCircularList[int]()
-	assert.NotNil(t, list)
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaCircularNueva(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	assert.NotNil(test, lista)
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestCircularListPrepend(t *testing.T) {
-	list := NewCircularList[string]()
-	list.Prepend("1")
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, "1", list.Head().Data())
-	assert.Equal(t, "1", list.Tail().Data())
-	list.Prepend("2")
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, "2", list.Head().Data())
-	assert.Equal(t, "1", list.Tail().Data())
+func TestListaCircularAnteponer(test *testing.T) {
+	lista := NuevaListaCircular[string]()
+	lista.Anteponer("1")
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, "1", lista.Cabeza().Dato())
+	assert.Equal(test, "1", lista.Cola().Dato())
+	lista.Anteponer("2")
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, "2", lista.Cabeza().Dato())
+	assert.Equal(test, "1", lista.Cola().Dato())
 }
 
-func TestCircularListAppend(t *testing.T) {
-	list := NewCircularList[string]()
-	list.Append("1")
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, "1", list.Head().Data())
-	assert.Equal(t, "1", list.Tail().Data())
-	list.Append("2")
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, "1", list.Head().Data())
-	assert.Equal(t, "2", list.Tail().Data())
+func TestListaCircularAdjuntar(test *testing.T) {
+	lista := NuevaListaCircular[string]()
+	lista.Adjuntar("1")
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, "1", lista.Cabeza().Dato())
+	assert.Equal(test, "1", lista.Cola().Dato())
+	lista.Adjuntar("2")
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, "1", lista.Cabeza().Dato())
+	assert.Equal(test, "2", lista.Cola().Dato())
 }
 
-func TestCircularListClear(t *testing.T) {
-	list := NewCircularList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Clear()
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaCircularLimpiar(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Limpiar()
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestCircularListIsEmpty(t *testing.T) {
-	list := NewCircularList[int]()
-	assert.True(t, list.IsEmpty())
-	list.Append(1)
-	assert.False(t, list.IsEmpty())
+func TestListaCircularEstaVacia(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	assert.True(test, lista.EstaVacia())
+	lista.Adjuntar(1)
+	assert.False(test, lista.EstaVacia())
 }
 
-func TestCircularListSize(t *testing.T) {
-	list := NewCircularList[int]()
-	assert.Equal(t, 0, list.Size())
-	list.Append(1)
-	assert.Equal(t, 1, list.Size())
-	list.Append(2)
-	assert.Equal(t, 2, list.Size())
+func TestListaCircularTamaño(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	assert.Equal(test, 0, lista.Tamaño())
+	lista.Adjuntar(1)
+	assert.Equal(test, 1, lista.Tamaño())
+	lista.Adjuntar(2)
+	assert.Equal(test, 2, lista.Tamaño())
 }
 
-func TestCircularListHead(t *testing.T) {
-	list := NewCircularList[int]()
-	assert.Nil(t, list.Head())
-	list.Append(1)
-	assert.Equal(t, 1, list.Head().Data())
-	list.Append(2)
-	assert.Equal(t, 1, list.Head().Data())
+func TestListaCircularCabeza(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	assert.Nil(test, lista.Cabeza())
+	lista.Adjuntar(1)
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	lista.Adjuntar(2)
+	assert.Equal(test, 1, lista.Cabeza().Dato())
 }
 
-func TestCircularListTail(t *testing.T) {
-	list := NewCircularList[int]()
-	assert.Nil(t, list.Tail())
-	list.Append(1)
-	assert.Equal(t, 1, list.Tail().Data())
-	list.Append(2)
-	assert.Equal(t, 2, list.Tail().Data())
+func TestListaCircularCola(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	assert.Nil(test, lista.Cola())
+	lista.Adjuntar(1)
+	assert.Equal(test, 1, lista.Cola().Dato())
+	lista.Adjuntar(2)
+	assert.Equal(test, 2, lista.Cola().Dato())
 }
 
-func TestCircularListRemove(t *testing.T) {
-	list := NewCircularList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	list.Remove(2)
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, 1, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
-	list.Remove(1)
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, 3, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
-	list.Remove(3)
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaCircularRemover(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	lista.Remover(2)
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
+	lista.Remover(1)
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, 3, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
+	lista.Remover(3)
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestCircularListRemoveLast(t *testing.T) {
-	list := NewCircularList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	list.RemoveLast()
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, 1, list.Head().Data())
-	assert.Equal(t, 2, list.Tail().Data())
-	list.RemoveLast()
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, 1, list.Head().Data())
-	assert.Equal(t, 1, list.Tail().Data())
-	list.RemoveLast()
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaCircularRemoverUltimo(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	lista.RemoverUltimo()
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	assert.Equal(test, 2, lista.Cola().Dato())
+	lista.RemoverUltimo()
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	assert.Equal(test, 1, lista.Cola().Dato())
+	lista.RemoverUltimo()
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestCircularListRemoveFirst(t *testing.T) {
-	list := NewCircularList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	list.RemoveFirst()
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, 2, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
-	list.RemoveFirst()
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, 3, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
-	list.RemoveFirst()
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaCircularRemoverPrimero(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	lista.RemoverPrimero()
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, 2, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
+	lista.RemoverPrimero()
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, 3, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
+	lista.RemoverPrimero()
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestCircularListAllRemoveOnEmptyList(t *testing.T) {
-	list := NewCircularList[int]()
-	list.Remove(1)
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
-	list.RemoveFirst()
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
-	list.RemoveLast()
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaCircularRemoverTodoEnListaVacia(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	lista.Remover(1)
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
+	lista.RemoverPrimero()
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
+	lista.RemoverUltimo()
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestCircularListFind(t *testing.T) {
-	list := NewCircularList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	nodo := list.Find(2)
-	assert.NotNil(t, nodo)
-	assert.Equal(t, 2, nodo.Data())
-	nodo = list.Find(4)
-	assert.Nil(t, nodo)
+func TestListaCircularEncontrar(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	nodo := lista.Encontrar(2)
+	assert.NotNil(test, nodo)
+	assert.Equal(test, 2, nodo.Dato())
+	nodo = lista.Encontrar(4)
+	assert.Nil(test, nodo)
 }
 
-func TestCircularListFindOnEmptyList(t *testing.T) {
-	list := NewCircularList[int]()
-	nodo := list.Find(1)
-	assert.Nil(t, nodo)
+func TestListaCircularEncontrarEnListaVacia(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	nodo := lista.Encontrar(1)
+	assert.Nil(test, nodo)
 }
 
-func TestCircularListStringOnEmpty(t *testing.T) {
-	list := NewCircularList[int]()
-	assert.Equal(t, "CircularList: ⇢ [] ⇠", list.String())
+func TestListaCircularStringEnVacio(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	assert.Equal(test, "ListaCircular: ⇢ [] ⇠", lista.String())
 }
 
-func TestCircularListString(t *testing.T) {
-	list := NewCircularList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	assert.Equal(t, "CircularList: ⇢ [1] ↔ [2] ↔ [3] ⇠", list.String())
+func TestListaCircularString(test *testing.T) {
+	lista := NuevaListaCircular[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	assert.Equal(test, "ListaCircular: ⇢ [1] ↔ [2] ↔ [3] ⇠", lista.String())
 }

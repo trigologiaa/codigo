@@ -2,213 +2,213 @@ package list
 
 import "fmt"
 
-// CircularList implementa una lista enlazada circular genérica.
-type CircularList[T comparable] struct {
-	head *DoubleLinkedNode[T]
-	size int
+// ListaCircular implementa una lista enlazada circular genérica.
+type ListaCircular[T comparable] struct {
+	cabeza	*DobleNodoEnlazado[T]
+	tamaño 	int
 }
 
-// NewCircularList crea una nueva lista enlazada circular.
+// NuevaListaCircular crea una nueva lista enlazada circular.
 //
 // Uso:
 //
-//	list := NewCircularList[int]() // Crea una nueva lista enlazada circular.
-func NewCircularList[T comparable]() *CircularList[T] {
-	return &CircularList[T]{}
+//	list := NuevaListaCircular[int]() // Crea una nueva lista enlazada circular.
+func NuevaListaCircular[T comparable]() *ListaCircular[T] {
+	return &ListaCircular[T]{}
 }
 
-// Head devuelve el primer nodo de la lista.
+// Cabeza devuelve el primer nodo de la lista.
 //
 // Uso:
 //
-//	head := list.Head() // Obtiene el primer nodo de la lista.
+//	cabeza := list.Cabeza() // Obtiene el primer nodo de la lista.
 //
 // Retorna:
 //   - el primer nodo de la lista.
-func (l *CircularList[T]) Head() *DoubleLinkedNode[T] {
-	return l.head
+func (lista *ListaCircular[T]) Cabeza() *DobleNodoEnlazado[T] {
+	return lista.cabeza
 }
 
-// Tail devuelve el último nodo de la lista.
+// Cola devuelve el último nodo de la lista.
 //
 // Uso:
 //
-//	tail := list.Tail() // Obtiene el último nodo de la lista.
+//	tail := list.Cola() // Obtiene el último nodo de la lista.
 //
 // Retorna:
 //   - el último nodo de la lista.
-func (l *CircularList[T]) Tail() *DoubleLinkedNode[T] {
-	if l.size == 0 {
+func (lista *ListaCircular[T]) Cola() *DobleNodoEnlazado[T] {
+	if lista.tamaño == 0 {
 		return nil
 	}
-	return l.head.Prev()
+	return lista.cabeza.Anterior()
 }
 
-// Size devuelve el tamaño de la lista.
+// Tamaño devuelve el tamaño de la lista.
 //
 // Uso:
 //
-//	size := list.Size() // Obtiene el tamaño de la lista.
+//	tamaño := list.Tamaño() // Obtiene el tamaño de la lista.
 //
 // Retorna:
 //   - el tamaño de la lista.
-func (l *CircularList[T]) Size() int {
-	return l.size
+func (lista *ListaCircular[T]) Tamaño() int {
+	return lista.tamaño
 }
 
-// IsEmpty evalúa si la lista está vacía.
+// EstaVacia evalúa si la lista está vacía.
 //
 // Uso:
 //
-//	empty := list.IsEmpty() // Verifica si la lista está vacía.
+//	empty := list.EstaVacia() // Verifica si la lista está vacía.
 //
 // Retorna:
 //   - `true` si la lista está vacía; `false` en caso contrario.
-func (l *CircularList[T]) IsEmpty() bool {
-	return l.size == 0
+func (lista *ListaCircular[T]) EstaVacia() bool {
+	return lista.tamaño == 0
 }
 
-// Clear elimina todos los elementos de la lista.
+// Limpiar elimina todos los elementos de la lista.
 //
 // Uso:
 //
-//	list.Clear() // Elimina todos los elementos de la lista.
-func (l *CircularList[T]) Clear() {
-	l.head = nil
-	l.size = 0
+//	list.Limpiar() // Elimina todos los elementos de la lista.
+func (lista *ListaCircular[T]) Limpiar() {
+	lista.cabeza = nil
+	lista.tamaño = 0
 }
 
-// Prepend agrega un nuevo nodo al principio de la lista.
+// Anteponer agrega un nuevo nodo al principio de la lista.
 //
 // Uso:
 //
-//	list.Prepend(10) // Agrega el valor 10 al principio de la lista.
+//	list.Anteponer(10) // Agrega el valor 10 al principio de la lista.
 //
 // Parámetros:
-//   - `data`: el valor a agregar al principio de la lista.
-func (l *CircularList[T]) Prepend(data T) {
-	node := NewDoubleLinkedNode(data)
-	if l.size == 0 {
-		l.head = node
-		l.head.SetNext(l.head)
-		l.head.SetPrev(l.head)
+//   - `dato`: el valor a agregar al principio de la lista.
+func (lista *ListaCircular[T]) Anteponer(dato T) {
+	nodo := NuevoDobleNodoEnlazado(dato)
+	if lista.tamaño == 0 {
+		lista.cabeza = nodo
+		lista.cabeza.EstablecerSiguiente(lista.cabeza)
+		lista.cabeza.EstablecerAnterior(lista.cabeza)
 	} else {
-		node.SetNext(l.head)
-		node.SetPrev(l.head.Prev())
-		l.head.Prev().SetNext(node)
-		l.head.SetPrev(node)
-		l.head = node
+		nodo.EstablecerSiguiente(lista.cabeza)
+		nodo.EstablecerAnterior(lista.cabeza.Anterior())
+		lista.cabeza.Anterior().EstablecerSiguiente(nodo)
+		lista.cabeza.EstablecerAnterior(nodo)
+		lista.cabeza = nodo
 	}
-	l.size++
+	lista.tamaño++
 }
 
-// Append agrega un nuevo nodo al final de la lista.
+// Adjuntar agrega un nuevo nodo al final de la lista.
 //
 // Uso:
 //
-//	list.Append(10) // Agrega el valor 10 al final de la lista.
+//	list.Adjuntar(10) // Agrega el valor 10 al final de la lista.
 //
 // Parámetros:
-//   - `data`: el valor a agregar al final de la lista.
-func (l *CircularList[T]) Append(data T) {
-	node := NewDoubleLinkedNode(data)
-	if l.size == 0 {
-		l.head = node
-		l.head.SetNext(l.head)
-		l.head.SetPrev(l.head)
+//   - `dato`: el valor a agregar al final de la lista.
+func (lista *ListaCircular[T]) Adjuntar(dato T) {
+	nodo := NuevoDobleNodoEnlazado(dato)
+	if lista.tamaño == 0 {
+		lista.cabeza = nodo
+		lista.cabeza.EstablecerSiguiente(lista.cabeza)
+		lista.cabeza.EstablecerAnterior(lista.cabeza)
 	} else {
-		node.SetNext(l.head)
-		node.SetPrev(l.head.Prev())
-		l.head.Prev().SetNext(node)
-		l.head.SetPrev(node)
+		nodo.EstablecerSiguiente(lista.cabeza)
+		nodo.EstablecerAnterior(lista.cabeza.Anterior())
+		lista.cabeza.Anterior().EstablecerSiguiente(nodo)
+		lista.cabeza.EstablecerAnterior(nodo)
 	}
-	l.size++
+	lista.tamaño++
 }
 
-// Find busca un nodo en la lista.
+// Encontrar busca un nodo en la lista.
 //
 // Uso:
 //
-//	node := list.Find(10) // Busca el valor 10 en la lista.
+//	nodo := list.Encontrar(10) // Busca el valor 10 en la lista.
 //
 // Parámetros:
-//   - `data`: el valor a buscar en la lista.
+//   - `dato`: el valor a buscar en la lista.
 //
 // Retorna:
 //   - el nodo que contiene el valor buscado; `nil` si el valor no se encuentra en la lista.
-func (l *CircularList[T]) Find(data T) *DoubleLinkedNode[T] {
-	if l.size == 0 {
+func (lista *ListaCircular[T]) Encontrar(dato T) *DobleNodoEnlazado[T] {
+	if lista.tamaño == 0 {
 		return nil
 	}
-	node := l.head
-	for i := 0; i < l.size; i++ {
-		if node.Data() == data {
-			return node
+	nodo := lista.cabeza
+	for indice := 0; indice < lista.tamaño; indice++ {
+		if nodo.Dato() == dato {
+			return nodo
 		}
-		node = node.Next()
+		nodo = nodo.Siguiente()
 	}
 	return nil
 }
 
-// RemoveFirst elimina el primer nodo de la lista.
+// RemoverPrimero elimina el primer nodo de la lista.
 //
 // Uso:
 //
-//	list.RemoveFirst() // Elimina el primer nodo de la lista.
-func (l *CircularList[T]) RemoveFirst() {
-	if l.size == 0 {
+//	list.RemoverPrimero() // Elimina el primer nodo de la lista.
+func (lista *ListaCircular[T]) RemoverPrimero() {
+	if lista.tamaño == 0 {
 		return
 	}
-	if l.size == 1 {
-		l.head = nil
-		l.size--
+	if lista.tamaño == 1 {
+		lista.cabeza = nil
+		lista.tamaño--
 		return
 	}
-	l.head.Prev().SetNext(l.head.Next())
-	l.head.Next().SetPrev(l.head.Prev())
-	l.head = l.head.Next()
-	l.size--
+	lista.cabeza.Anterior().EstablecerSiguiente(lista.cabeza.Siguiente())
+	lista.cabeza.Siguiente().EstablecerAnterior(lista.cabeza.Anterior())
+	lista.cabeza = lista.cabeza.Siguiente()
+	lista.tamaño--
 }
 
-// RemoveLast elimina el último nodo de la lista.
+// RemoverUltimo elimina el último nodo de la lista.
 //
 // Uso:
 //
-//	list.RemoveLast() // Elimina el último nodo de la lista.
-func (l *CircularList[T]) RemoveLast() {
-	if l.size == 0 {
+//	list.RemoverUltimo() // Elimina el último nodo de la lista.
+func (lista *ListaCircular[T]) RemoverUltimo() {
+	if lista.tamaño == 0 {
 		return
 	}
-	if l.size == 1 {
-		l.head = nil
-		l.size--
+	if lista.tamaño == 1 {
+		lista.cabeza = nil
+		lista.tamaño--
 		return
 	}
-	l.head.Prev().Prev().SetNext(l.head)
-	l.head.SetPrev(l.head.Prev().Prev())
-	l.size--
+	lista.cabeza.Anterior().Anterior().EstablecerSiguiente(lista.cabeza)
+	lista.cabeza.EstablecerAnterior(lista.cabeza.Anterior().Anterior())
+	lista.tamaño--
 }
 
-// Remove elimina un la primera aparición de un dato en la lista.
+// Remover elimina un la primera aparición de un dato en la lista.
 //
 // Uso:
 //
-//	list.Remove(10) // Elimina la primera aparición del dato 10 en la lista.
+//	list.Remover(10) // Elimina la primera aparición del dato 10 en la lista.
 //
 // Parámetros:
-//   - `data`: el dato a eliminar de la lista.
-func (l *CircularList[T]) Remove(data T) {
-	node := l.Find(data)
-	if node == nil {
+//   - `dato`: el dato a eliminar de la lista.
+func (lista *ListaCircular[T]) Remover(dato T) {
+	nodo := lista.Encontrar(dato)
+	if nodo == nil {
 		return
 	}
-	if node == l.head {
-		l.RemoveFirst()
+	if nodo == lista.cabeza {
+		lista.RemoverPrimero()
 		return
 	}
-	node.Prev().SetNext(node.Next())
-	node.Next().SetPrev(node.Prev())
-	l.size--
+	nodo.Anterior().EstablecerSiguiente(nodo.Siguiente())
+	nodo.Siguiente().EstablecerAnterior(nodo.Anterior())
+	lista.tamaño--
 }
 
 // String devuelve una representación en cadena de la lista.
@@ -219,20 +219,20 @@ func (l *CircularList[T]) Remove(data T) {
 //
 // Retorna:
 //   - una representación en cadena de la lista.
-func (l *CircularList[T]) String() string {
-	if l.IsEmpty() {
-		return "CircularList: ⇢ [] ⇠"
+func (lista *ListaCircular[T]) String() string {
+	if lista.EstaVacia() {
+		return "ListaCircular: ⇢ [] ⇠"
 	}
-	result := "CircularList: ⇢ "
-	current := l.Head()
+	resultado := "ListaCircular: ⇢ "
+	current := lista.Cabeza()
 	for {
-		result += fmt.Sprintf("[%v]", current.Data())
-		if current == l.Tail() {
+		resultado += fmt.Sprintf("[%v]", current.Dato())
+		if current == lista.Cola() {
 			break
 		}
-		result += " ↔ "
-		current = current.Next()
+		resultado += " ↔ "
+		current = current.Siguiente()
 	}
-	result += " ⇠"
-	return result
+	resultado += " ⇠"
+	return resultado
 }

@@ -1,81 +1,81 @@
 // Package queue implementa una cola genérica sobre un arreglo dinámico.
-// Expone la estructura Queue y sus métodos para manipular una cola.
+// Expone la estructura Cola y sus métodos para manipular una cola.
 package queue
 
 import "errors"
 
-// Queue implementa una cola genérica sobre un arreglo dinámico.
-type Queue[T any] struct {
-	data []T
+// Cola implementa una cola genérica sobre un arreglo dinámico.
+type Cola[T any] struct {
+	dato []T
 }
 
-// NewQueue crea una nueva cola vacía. O(1)
+// NuevaCola crea una nueva cola vacía. O(1)
 //
 // Uso:
 //
-//	q := queue.New[int]() // Crea una nueva cola de enteros.
-func NewQueue[T any]() *Queue[T] {
-	return &Queue[T]{}
+//	cola := queue.New[int]() // Crea una nueva cola de enteros.
+func NuevaCola[T any]() *Cola[T] {
+	return &Cola[T]{}
 }
 
-// Enqueue agrega un elemento a la cola. O(1)
+// AgregarACola agrega un elemento a la cola. O(1)
 //
 // Uso:
 //
-//	q.Enqueue(10) // Agrega el entero 10 a la cola.
+//	cola.AgregarACola(10) // Agrega el entero 10 a la cola.
 //
 // Parámetros:
-//   - `v`: el elemento a agregar a la cola.
-func (q *Queue[T]) Enqueue(v T) {
-	q.data = append(q.data, v)
+//   - `valor`: el elemento a agregar a la cola.
+func (cola *Cola[T]) AgregarACola(valor T) {
+	cola.dato = append(cola.dato, valor)
 }
 
-// Dequeue saca un elemento de la cola. O(1)
+// SacarDeCola saca un elemento de la cola. O(1)
 //
 // Uso:
 //
-//	v, err := q.Dequeue() // Saca un elemento de la cola.
+//	valor, err := cola.SacarDeCola() // Saca un elemento de la cola.
 //
 // Retorna:
 //   - el elemento sacado de la cola.
 //   - un error si la cola está vacía.
-func (q *Queue[T]) Dequeue() (T, error) {
-	var head T
-	if len(q.data) == 0 {
-		return head, errors.New("cola vacía")
+func (cola *Cola[T]) SacarDeCola() (T, error) {
+	var cabeza T
+	if len(cola.dato) == 0 {
+		return cabeza, errors.New("cola vacía")
 	}
-	head = q.data[0]
-	q.data = q.data[1:]
-	return head, nil
+	cabeza = cola.dato[0]
+	cola.dato = cola.dato[1:]
+	return cabeza, nil
 }
 
-// Front devuelve el elemento del frente de la cola. O(1)
+// Frente devuelve el elemento del frente de la cola. O(1)
 // Esta operación no modifica la cola.
 //
 // Uso:
 //
-//	v, err := q.Front() // Obtiene el elemento del frente de la cola.
+//	valor, err := cola.Frente() // Obtiene el elemento del frente de la cola.
 //
 // Retorna:
 //   - el elemento del frente de la cola.
 //   - un error si la cola está vacía.
-func (q *Queue[T]) Front() (T, error) {
-	var head T
-	if len(q.data) == 0 {
-		return head, errors.New("cola vacía")
+func (cola *Cola[T]) Frente() (T, error) {
+	var cabeza T
+	if len(cola.dato) == 0 {
+		return cabeza, errors.New("cola vacía")
 	}
-	head = q.data[0]
-	return head, nil
+	cabeza = cola.dato[0]
+	return cabeza, nil
 }
 
-// IsEmpty verifica si la cola esta vacia. O(1)
+// EstaVacia verifica si la cola esta vacia. O(1)
 //
 // Uso:
 //
-//	empty := q.IsEmpty() // Verifica si la cola está vacía.
+//	empty := cola.EstaVacia() // Verifica si la cola está vacía.
 //
 // Retorna:
 //   - `true` si la cola está vacía; `false` en caso contrario.
-func (q *Queue[T]) IsEmpty() bool {
-	return len(q.data) == 0
+func (cola *Cola[T]) EstaVacia() bool {
+	return len(cola.dato) == 0
 }

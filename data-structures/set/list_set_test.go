@@ -5,89 +5,89 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewListSet(t *testing.T) {
-	set := NewListSet[int]()
-	assert.NotNil(t, set)
-	assert.Equal(t, 0, set.Size())
+func TestConjuntoDeListasNuevo(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	assert.NotNil(test, conjunto)
+	assert.Equal(test, 0, conjunto.Tamaño())
 }
 
-func TestListSetAdd(t *testing.T) {
-	set := NewListSet[int]()
-	set.Add(1)
-	assert.Equal(t, 1, set.Size())
+func TestConjuntoDeListasAgregar(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	conjunto.Agregar(1)
+	assert.Equal(test, 1, conjunto.Tamaño())
 }
 
-func TestListSetAddMultiple(t *testing.T) {
-	set := NewListSet[int]()
-	set.Add(1, 2, 3)
-	assert.Equal(t, 3, set.Size())
+func TestConjuntoDeListasAgregarMultiples(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	conjunto.Agregar(1, 2, 3)
+	assert.Equal(test, 3, conjunto.Tamaño())
 }
 
-func TestListSetAddExistenteNoRepite(t *testing.T) {
-	set := NewListSet[int]()
-	set.Add(1)
-	set.Add(1)
-	assert.Equal(t, 1, set.Size())
+func TestConjuntoDeListasAgregarExistenteSinRepetir(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	conjunto.Agregar(1)
+	conjunto.Agregar(1)
+	assert.Equal(test, 1, conjunto.Tamaño())
 }
 
-func TestListSetContains(t *testing.T) {
-	set := NewListSet[int]()
-	set.Add(1)
-	assert.True(t, set.Contains(1))
-	assert.False(t, set.Contains(2))
+func TestConjuntoDeListasContiene(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	conjunto.Agregar(1)
+	assert.True(test, conjunto.Contiene(1))
+	assert.False(test, conjunto.Contiene(2))
 }
 
-func TestListSetRemove(t *testing.T) {
-	set := NewListSet[int]()
-	set.Add(1)
-	set.Add(2)
-	assert.True(t, set.Contains(1))
-	assert.Equal(t, 2, set.Size())
-	set.Remove(1)
-	assert.False(t, set.Contains(1))
-	assert.Equal(t, 1, set.Size())
+func TestConjuntoDeListasRemover(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	conjunto.Agregar(1)
+	conjunto.Agregar(2)
+	assert.True(test, conjunto.Contiene(1))
+	assert.Equal(test, 2, conjunto.Tamaño())
+	conjunto.Remover(1)
+	assert.False(test, conjunto.Contiene(1))
+	assert.Equal(test, 1, conjunto.Tamaño())
 }
 
-func TestListSetRemoveNonExistent(t *testing.T) {
-	set := NewListSet[int]()
-	set.Add(1)
-	assert.Equal(t, 1, set.Size())
-	set.Remove(2)
-	assert.Equal(t, 1, set.Size())
+func TestConjuntoDeListasRemoverNoExistente(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	conjunto.Agregar(1)
+	assert.Equal(test, 1, conjunto.Tamaño())
+	conjunto.Remover(2)
+	assert.Equal(test, 1, conjunto.Tamaño())
 }
 
-func TestListSetSize(t *testing.T) {
-	set := NewListSet[int]()
-	assert.Equal(t, 0, set.Size())
-	set.Add(1)
-	assert.Equal(t, 1, set.Size())
-	set.Add(2)
-	assert.Equal(t, 2, set.Size())
+func TestConjuntoDeListasTamaño(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	assert.Equal(test, 0, conjunto.Tamaño())
+	conjunto.Agregar(1)
+	assert.Equal(test, 1, conjunto.Tamaño())
+	conjunto.Agregar(2)
+	assert.Equal(test, 2, conjunto.Tamaño())
 }
 
-func TestListSetValuesOnAnEmptySet(t *testing.T) {
-	set := NewListSet[int]()
-	values := set.Values()
-	assert.Empty(t, values)
+func TestConjuntoDeListasValoresEnUnConjuntoVacio(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	valores := conjunto.Valores()
+	assert.Empty(test, valores)
 }
 
-func TestListSetValuesOnANonEmptySet(t *testing.T) {
-	set := NewListSet(1, 2)
-	values := set.Values()
-	assert.Len(t, values, 2)
-	assert.ElementsMatch(t, []int{1, 2}, values)
+func TestConjuntoDeListasValoresEnUnConjuntoNoVacio(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas(1, 2)
+	valores := conjunto.Valores()
+	assert.Len(test, valores, 2)
+	assert.ElementsMatch(test, []int{1, 2}, valores)
 }
 
-func TestListSetStringEnSetVacio(t *testing.T) {
-	set := NewListSet[int]()
-	assert.Equal(t, "Set: {}", set.String())
+func TestConjuntoDeListasStringEnUnConjuntoVacio(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas[int]()
+	assert.Equal(test, "Conjunto: {}", conjunto.String())
 }
 
-func TestListSetStringEnSetNoVacio(t *testing.T) {
-	set := NewListSet(1, 2)
-	possibleRepresentations := []string{
-		"Set: {1, 2}",
-		"Set: {2, 1}",
+func TestConjuntoDeListasStringEnUnConjuntoNoVacio(test *testing.T) {
+	conjunto := NuevoConjuntoDeListas(1, 2)
+	posiblesRepresentaciones := []string{
+		"Conjunto: {1, 2}",
+		"Conjunto: {2, 1}",
 	}
-	assert.Contains(t, possibleRepresentations, set.String())
+	assert.Contains(test, posiblesRepresentaciones, conjunto.String())
 }

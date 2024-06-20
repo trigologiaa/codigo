@@ -5,205 +5,205 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewLinkedList(t *testing.T) {
-	list := NewLinkedList[int]()
-	assert.NotNil(t, list)
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaEnlazadaNueva(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	assert.NotNil(test, lista)
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestLinkedListPrependOnEmptyList(t *testing.T) {
-	list := NewLinkedList[string]()
-	list.Prepend("1")
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, "1", list.Head().Data())
-	assert.Equal(t, "1", list.Tail().Data())
+func TestListaEnlazadaAnteponerEnVacia(test *testing.T) {
+	lista := NuevaListaEnlazada[string]()
+	lista.Anteponer("1")
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, "1", lista.Cabeza().Dato())
+	assert.Equal(test, "1", lista.Cola().Dato())
 }
 
-func TestLinkedListPrependOnNonEmptyList(t *testing.T) {
-	list := NewLinkedList[string]()
-	list.Append("1")
-	list.Prepend("2")
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, "2", list.Head().Data())
-	assert.Equal(t, "1", list.Tail().Data())
+func TestListaEnlazadaAnteponerEnNoVacia(test *testing.T) {
+	lista := NuevaListaEnlazada[string]()
+	lista.Adjuntar("1")
+	lista.Anteponer("2")
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, "2", lista.Cabeza().Dato())
+	assert.Equal(test, "1", lista.Cola().Dato())
 }
 
-func TestLinkedListAppendOnEmptyList(t *testing.T) {
-	list := NewLinkedList[string]()
-	list.Append("1")
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, "1", list.Head().Data())
-	assert.Equal(t, "1", list.Tail().Data())
+func TestListaEnlazadaAdjuntarEnVacia(test *testing.T) {
+	lista := NuevaListaEnlazada[string]()
+	lista.Adjuntar("1")
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, "1", lista.Cabeza().Dato())
+	assert.Equal(test, "1", lista.Cola().Dato())
 }
 
-func TestLinkedListAppendOnNonEmptyList(t *testing.T) {
-	list := NewLinkedList[string]()
-	list.Append("1")
-	list.Append("2")
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, "1", list.Head().Data())
-	assert.Equal(t, "2", list.Tail().Data())
+func TestListaEnlazadaAdjuntarEnNoVacia(test *testing.T) {
+	lista := NuevaListaEnlazada[string]()
+	lista.Adjuntar("1")
+	lista.Adjuntar("2")
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, "1", lista.Cabeza().Dato())
+	assert.Equal(test, "2", lista.Cola().Dato())
 }
 
-func TestLinkedListClear(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Clear()
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaEnlazadaLimpiar(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Limpiar()
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestLinkedListIsEmpty(t *testing.T) {
-	list := NewLinkedList[int]()
-	assert.True(t, list.IsEmpty())
-	list.Append(1)
-	assert.False(t, list.IsEmpty())
+func TestListaEnlazadaEstaVacia(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	assert.True(test, lista.EstaVacia())
+	lista.Adjuntar(1)
+	assert.False(test, lista.EstaVacia())
 }
 
-func TestLinkedListSize(t *testing.T) {
-	list := NewLinkedList[int]()
-	assert.Equal(t, 0, list.Size())
-	list.Append(1)
-	assert.Equal(t, 1, list.Size())
-	list.Append(2)
-	assert.Equal(t, 2, list.Size())
+func TestListaEnlazadaTamaño(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	assert.Equal(test, 0, lista.Tamaño())
+	lista.Adjuntar(1)
+	assert.Equal(test, 1, lista.Tamaño())
+	lista.Adjuntar(2)
+	assert.Equal(test, 2, lista.Tamaño())
 }
 
-func TestLinkedListHead(t *testing.T) {
-	list := NewLinkedList[int]()
-	assert.Nil(t, list.Head())
-	list.Append(1)
-	assert.Equal(t, 1, list.Head().Data())
-	list.Append(2)
-	assert.Equal(t, 1, list.Head().Data())
+func TestListaEnlazadaCabeza(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	assert.Nil(test, lista.Cabeza())
+	lista.Adjuntar(1)
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	lista.Adjuntar(2)
+	assert.Equal(test, 1, lista.Cabeza().Dato())
 }
 
-func TestLinkedListTail(t *testing.T) {
-	list := NewLinkedList[int]()
-	assert.Nil(t, list.Tail())
-	list.Append(1)
-	assert.Equal(t, 1, list.Tail().Data())
-	list.Append(2)
-	assert.Equal(t, 2, list.Tail().Data())
+func TestListaEnlazadaCola(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	assert.Nil(test, lista.Cola())
+	lista.Adjuntar(1)
+	assert.Equal(test, 1, lista.Cola().Dato())
+	lista.Adjuntar(2)
+	assert.Equal(test, 2, lista.Cola().Dato())
 }
 
-func TestLinkedListFind(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	nodo := list.Find(2)
-	assert.NotNil(t, nodo)
-	assert.Equal(t, 2, nodo.Data())
-	nodo = list.Find(4)
-	assert.Nil(t, nodo)
+func TestListaEnlazadaEncontrar(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	nodo := lista.Encontrar(2)
+	assert.NotNil(test, nodo)
+	assert.Equal(test, 2, nodo.Dato())
+	nodo = lista.Encontrar(4)
+	assert.Nil(test, nodo)
 }
 
-func TestLinkedListRemoveFirst(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	list.RemoveFirst()
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, 2, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
-	list.RemoveFirst()
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, 3, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
-	list.RemoveFirst()
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaEnlazadaRemoverPrimero(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	lista.RemoverPrimero()
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, 2, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
+	lista.RemoverPrimero()
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, 3, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
+	lista.RemoverPrimero()
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestLinkedListRemoveLast(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	list.RemoveLast()
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, 1, list.Head().Data())
-	assert.Equal(t, 2, list.Tail().Data())
-	list.RemoveLast()
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, 1, list.Head().Data())
-	assert.Equal(t, 1, list.Tail().Data())
-	list.RemoveLast()
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaEnlazadaRemoverUltimo(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	lista.RemoverUltimo()
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	assert.Equal(test, 2, lista.Cola().Dato())
+	lista.RemoverUltimo()
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	assert.Equal(test, 1, lista.Cola().Dato())
+	lista.RemoverUltimo()
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestLinkedListRemove(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	list.Remove(2)
-	assert.Equal(t, 2, list.Size())
-	assert.Equal(t, 1, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
-	list.Remove(1)
-	assert.Equal(t, 1, list.Size())
-	assert.Equal(t, 3, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
-	list.Remove(3)
-	assert.Equal(t, 0, list.Size())
-	assert.Nil(t, list.Head())
-	assert.Nil(t, list.Tail())
+func TestListaEnlazadaRemover(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	lista.Remover(2)
+	assert.Equal(test, 2, lista.Tamaño())
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
+	lista.Remover(1)
+	assert.Equal(test, 1, lista.Tamaño())
+	assert.Equal(test, 3, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
+	lista.Remover(3)
+	assert.Equal(test, 0, lista.Tamaño())
+	assert.Nil(test, lista.Cabeza())
+	assert.Nil(test, lista.Cola())
 }
 
-func TestLinkedListRemoveOnLastElement(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	list.Append(4)
-	list.Remove(4)
-	assert.Equal(t, 3, list.Size())
-	assert.Equal(t, 1, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
+func TestListaEnlazadaRemoverEnUltimoElemento(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	lista.Adjuntar(4)
+	lista.Remover(4)
+	assert.Equal(test, 3, lista.Tamaño())
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
 }
 
-func TestLinkedListRemoveNotExists(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	list.Remove(4)
-	assert.Equal(t, 3, list.Size())
-	assert.Equal(t, 1, list.Head().Data())
-	assert.Equal(t, 3, list.Tail().Data())
+func TestListaEnlazadaRemoverNoExistente(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	lista.Remover(4)
+	assert.Equal(test, 3, lista.Tamaño())
+	assert.Equal(test, 1, lista.Cabeza().Dato())
+	assert.Equal(test, 3, lista.Cola().Dato())
 }
 
-func TestLinkedListRemoveFirstOnEmpty(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.RemoveFirst()
-	assert.Equal(t, 0, list.Size())
+func TestListaEnlazadaRemoverPrimeroEnVacia(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.RemoverPrimero()
+	assert.Equal(test, 0, lista.Tamaño())
 }
 
-func TestLinkedListRemoveLastOnEmpty(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.RemoveLast()
-	assert.Equal(t, 0, list.Size())
+func TestListaEnlazadaRemoverUltimoEnVacia(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.RemoverUltimo()
+	assert.Equal(test, 0, lista.Tamaño())
 }
 
-func TestLinkedListStringOnEmpty(t *testing.T) {
-	list := NewLinkedList[int]()
-	assert.Equal(t, "LinkedList: []", list.String())
+func TestListaEnlazadaStringEnVacia(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	assert.Equal(test, "ListaEnlazada: []", lista.String())
 }
 
-func TestLinkedListString(t *testing.T) {
-	list := NewLinkedList[int]()
-	list.Append(1)
-	list.Append(2)
-	list.Append(3)
-	assert.Equal(t, "LinkedList: [1] → [2] → [3]", list.String())
+func TestListaEnlazadaString(test *testing.T) {
+	lista := NuevaListaEnlazada[int]()
+	lista.Adjuntar(1)
+	lista.Adjuntar(2)
+	lista.Adjuntar(3)
+	assert.Equal(test, "ListaEnlazada: [1] → [2] → [3]", lista.String())
 }

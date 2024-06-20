@@ -4,76 +4,76 @@ package stack
 
 import "errors"
 
-// Stack proporciona una pila cuyos elementos son de un tipo genérico.
+// Pila proporciona una pila cuyos elementos son de un tipo genérico.
 // La implementación se basa en un arreglo dinámico.
-type Stack[T any] struct {
-	data []T
+type Pila[T any] struct {
+	dato []T
 }
 
-// NewStack crea una nueva pila vacía.
+// NuevaPila crea una nueva pila vacía.
 //
 // Uso:
 //
-//	s := stack.New[int]() // Crea una pila de enteros.
-func NewStack[T any]() *Stack[T] {
-	return &Stack[T]{}
+//	pila := stack.New[int]() // Crea una pila de enteros.
+func NuevaPila[T any]() *Pila[T] {
+	return &Pila[T]{}
 }
 
-// Push agrega un elemento a la pila.
+// Empujar agrega un elemento a la pila.
 //
 // Uso:
 //
-//	s.Push(10) // Agrega el entero 10 a la pila.
-func (s *Stack[T]) Push(x T) {
-	s.data = append(s.data, x)
+//	pila.Empujar(10) // Agrega el entero 10 a la pila.
+func (pila *Pila[T]) Empujar(elemento T) {
+	pila.dato = append(pila.dato, elemento)
 }
 
-// Pop remueve y retorna el elemento en el tope de la pila.
+// Tirar remueve y retorna el elemento en el tope de la pila.
 // Si la pila está vacía, retorna un error.
 //
 // Uso:
 //
-//	if x, err := s.Pop(); err != nil {
+//	if elemento, err := pila.Tirar(); err != nil {
 //		fmt.Println(err)
 //	} else {
-//		fmt.Println(x)
+//		fmt.Println(elemento)
 //	}
-func (s *Stack[T]) Pop() (T, error) {
-	var x T
-	if s.IsEmpty() {
-		return x, errors.New("pila vacía")
+func (pila *Pila[T]) Tirar() (T, error) {
+	var elemento T
+	if pila.EstaVacia() {
+		return elemento, errors.New("pila vacía")
 	}
-	x = s.data[len(s.data)-1]
-	s.data = s.data[:len(s.data)-1]
-	return x, nil
+	elemento = pila.dato[len(pila.dato) - 1]
+	pila.dato = pila.dato[:len(pila.dato) - 1]
+	return elemento, nil
 }
 
-// Top retorna el elemento en el tope de la pila.
+// Tope retorna el elemento en el tope de la pila.
 // Si la pila está vacía, retorna un error.
 //
 // Uso:
 //
-//	if x, err := s.Top(); err != nil {
+//	if elemento, err := pila.Tope(); err != nil {
 //		fmt.Println(err)
 //	} else {
-//		fmt.Println(x)
+//		fmt.Println(elemento)
 //	}
-func (s *Stack[T]) Top() (T, error) {
-	var x T
-	if s.IsEmpty() {
-		return x, errors.New("pila vacía")
+func (pila *Pila[T]) Tope() (T, error) {
+	var elemento T
+	if pila.EstaVacia() {
+		return elemento, errors.New("pila vacía")
 	}
-	x = s.data[len(s.data)-1]
-	return x, nil
+	elemento = pila.dato[len(pila.dato) - 1]
+	return elemento, nil
 }
 
-// IsEmpty retorna true si la pila está vacía.
+// EstaVacia retorna true si la pila está vacía.
 //
 // Uso:
 //
-//	if s.IsEmpty() {
+//	if pila.EstaVacia() {
 //		fmt.Println("La pila está vacía")
 //	}
-func (s *Stack[T]) IsEmpty() bool {
-	return len(s.data) == 0
+func (pila *Pila[T]) EstaVacia() bool {
+	return len(pila.dato) == 0
 }

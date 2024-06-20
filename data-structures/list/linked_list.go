@@ -1,209 +1,209 @@
 // Package list proporciona implementaciones de listas enlazadas simples, dobles y circulares.
-// Expone las estructuras LinkedList, DoubleLinkedList y CircularList y sus métodos para manipular listas.
+// Expone las estructuras ListaEnlazada, DoubleLinkedList y CircularList y sus métodos para manipular listas.
 package list
 
 import "fmt"
 
-// LinkedList se implementa con un nodo que contiene un dato y un puntero al siguiente nodo.
+// ListaEnlazada se implementa con un nodo que contiene un dato y un puntero al siguiente nodo.
 // Los elementos deben ser de un tipo comparable.
-type LinkedList[T comparable] struct {
-	head *LinkedNode[T]
-	tail *LinkedNode[T]
-	size int
+type ListaEnlazada[T comparable] struct {
+	cabeza	*NodoEnlazado[T]
+	cola 	*NodoEnlazado[T]
+	tamaño 	int
 }
 
-// NewLinkedList crea una nueva lista vacía.
+// NuevaListaEnlazada crea una nueva lista vacía.
 //
 // Uso:
 //
-//	list := list.NewLinkedList[int]() // Crea una nueva lista vacía.
-func NewLinkedList[T comparable]() *LinkedList[T] {
-	return &LinkedList[T]{}
+//	list := list.NuevaListaEnlazada[int]() // Crea una nueva lista vacía.
+func NuevaListaEnlazada[T comparable]() *ListaEnlazada[T] {
+	return &ListaEnlazada[T]{}
 }
 
-// Head devuelve el primer nodo de la lista.
+// Cabeza devuelve el primer nodo de la lista.
 //
 // Uso:
 //
-//	head := list.Head() // Obtiene el primer nodo de la lista.
+//	cabeza := list.Cabeza() // Obtiene el primer nodo de la lista.
 //
 // Retorna:
 //   - el primer nodo de la lista.
-func (l *LinkedList[T]) Head() *LinkedNode[T] {
-	return l.head
+func (lista *ListaEnlazada[T]) Cabeza() *NodoEnlazado[T] {
+	return lista.cabeza
 }
 
-// Tail devuelve el último nodo de la lista.
+// Cola devuelve el último nodo de la lista.
 //
 // Uso:
 //
-//	tail := list.Tail() // Obtiene el último nodo de la lista.
+//	cola := list.Cola() // Obtiene el último nodo de la lista.
 //
 // Retorna:
 //   - el último nodo de la lista.
-func (l *LinkedList[T]) Tail() *LinkedNode[T] {
-	return l.tail
+func (lista *ListaEnlazada[T]) Cola() *NodoEnlazado[T] {
+	return lista.cola
 }
 
-// Size devuelve el tamaño de la lista.
+// Tamaño devuelve el tamaño de la lista.
 //
 // Uso:
 //
-//	size := list.Size() // Obtiene el tamaño de la lista.
+//	tamaño := list.Tamaño() // Obtiene el tamaño de la lista.
 //
 // Retorna:
 //   - el tamaño de la lista.
-func (l *LinkedList[T]) Size() int {
-	return l.size
+func (lista *ListaEnlazada[T]) Tamaño() int {
+	return lista.tamaño
 }
 
-// IsEmpty evalúa si la lista está vacía.
+// EstaVacia evalúa si la lista está vacía.
 //
 // Uso:
 //
-//	empty := list.IsEmpty() // Verifica si la lista está vacía.
+//	empty := list.EstaVacia() // Verifica si la lista está vacía.
 //
 // Retorna:
 //   - `true` si la lista está vacía; `false` en caso contrario.
-func (l *LinkedList[T]) IsEmpty() bool {
-	return l.size == 0
+func (lista *ListaEnlazada[T]) EstaVacia() bool {
+	return lista.tamaño == 0
 }
 
-// Clear elimina todos los nodos de la lista.
+// Limpiar elimina todos los nodos de la lista.
 //
 // Uso:
 //
-//	list.Clear() // Elimina todos los nodos de la lista.
-func (l *LinkedList[T]) Clear() {
-	l.head = nil
-	l.tail = nil
-	l.size = 0
+//	list.Limpiar() // Elimina todos los nodos de la lista.
+func (lista *ListaEnlazada[T]) Limpiar() {
+	lista.cabeza = nil
+	lista.cola = nil
+	lista.tamaño = 0
 }
 
-// Prepend inserta un dato al inicio de la lista.
+// Anteponer inserta un dato al inicio de la lista.
 //
 // Uso:
 //
-//	list.Prepend(10) // Inserta el dato 10 al inicio de la lista.
+//	list.Anteponer(10) // Inserta el dato 10 al inicio de la lista.
 //
 // Parámetros:
-//   - `data`: el dato a insertar en la lista.
-func (l *LinkedList[T]) Prepend(data T) {
-	newNode := NewLinkedListNode(data)
-	if l.IsEmpty() {
-		l.tail = newNode
+//   - `dato`: el dato a insertar en la lista.
+func (lista *ListaEnlazada[T]) Anteponer(dato T) {
+	nuevoNodo := NuevoNodoEnlazado(dato)
+	if lista.EstaVacia() {
+		lista.cola = nuevoNodo
 	} else {
-		newNode.SetNext(l.head)
+		nuevoNodo.EstablecerSiguiente(lista.cabeza)
 	}
-	l.head = newNode
-	l.size++
+	lista.cabeza = nuevoNodo
+	lista.tamaño++
 }
 
-// Append inserta un dato al final de la lista.
+// Adjuntar inserta un dato al final de la lista.
 //
 // Uso:
 //
-//	list.Append(10) // Inserta el dato 10 al final de la lista.
+//	list.Adjuntar(10) // Inserta el dato 10 al final de la lista.
 //
 // Parámetros:
-//   - `data`: el dato a insertar en la lista.
-func (l *LinkedList[T]) Append(data T) {
-	newNode := NewLinkedListNode(data)
-	if l.IsEmpty() {
-		l.head = newNode
+//   - `dato`: el dato a insertar en la lista.
+func (lista *ListaEnlazada[T]) Adjuntar(dato T) {
+	nuevoNodo := NuevoNodoEnlazado(dato)
+	if lista.EstaVacia() {
+		lista.cabeza = nuevoNodo
 	} else {
-		l.tail.SetNext(newNode)
+		lista.cola.EstablecerSiguiente(nuevoNodo)
 	}
-	l.tail = newNode
-	l.size++
+	lista.cola = nuevoNodo
+	lista.tamaño++
 }
 
-// Find busca un dato en la lista, si lo encuentra devuelve el nodo
+// Encontrar busca un dato en la lista, si lo encuentra devuelve el nodo
 // correspondiente, si no lo encuentra devuelve nil
 //
 // Uso:
 //
-//	node := list.Find(10) // Busca el dato 10 en la lista.
+//	nodo := list.Encontrar(10) // Busca el dato 10 en la lista.
 //
 // Parámetros:
-//   - `data`: el dato a buscar en la lista.
+//   - `dato`: el dato a buscar en la lista.
 //
 // Retorna:
 //   - el nodo que contiene el dato; `nil` si el dato no se encuentra.
-func (l *LinkedList[T]) Find(data T) *LinkedNode[T] {
-	for current := l.head; current != nil; current = current.Next() {
-		if current.Data() == data {
-			return current
+func (lista *ListaEnlazada[T]) Encontrar(dato T) *NodoEnlazado[T] {
+	for actual := lista.cabeza; actual != nil; actual = actual.Siguiente() {
+		if actual.Dato() == dato {
+			return actual
 		}
 	}
 	return nil
 }
 
-// RemoveFirst elimina el primer nodo de la lista.
+// RemoverPrimero elimina el primer nodo de la lista.
 //
 // Uso:
 //
-//	list.RemoveFirst() // Elimina el primer nodo de la lista.
-func (l *LinkedList[T]) RemoveFirst() {
-	if l.IsEmpty() {
+//	list.RemoverPrimero() // Elimina el primer nodo de la lista.
+func (lista *ListaEnlazada[T]) RemoverPrimero() {
+	if lista.EstaVacia() {
 		return
 	}
-	l.head = l.head.Next()
-	if l.head == nil {
-		l.tail = nil
+	lista.cabeza = lista.cabeza.Siguiente()
+	if lista.cabeza == nil {
+		lista.cola = nil
 	}
-	l.size--
+	lista.tamaño--
 }
 
-// RemoveLast elimina el último nodo de la lista.
+// RemoverUltimo elimina el último nodo de la lista.
 //
 // Uso:
 //
-//	list.RemoveLast() // Elimina el último nodo de la lista.
-func (l *LinkedList[T]) RemoveLast() {
-	if l.IsEmpty() {
+//	list.RemoverUltimo() // Elimina el último nodo de la lista.
+func (lista *ListaEnlazada[T]) RemoverUltimo() {
+	if lista.EstaVacia() {
 		return
 	}
-	if l.Size() == 1 {
-		l.head = nil
-		l.tail = nil
+	if lista.Tamaño() == 1 {
+		lista.cabeza = nil
+		lista.cola = nil
 	} else {
-		current := l.head
-		for current.Next() != l.tail {
-			current = current.Next()
+		actual := lista.cabeza
+		for actual.Siguiente() != lista.cola {
+			actual = actual.Siguiente()
 		}
-		current.SetNext(nil)
-		l.tail = current
+		actual.EstablecerSiguiente(nil)
+		lista.cola = actual
 	}
-	l.size--
+	lista.tamaño--
 }
 
-// Remove elimina un la primera aparición de un dato en la lista.
+// Remover elimina un la primera aparición de un dato en la lista.
 //
 // Uso:
 //
-//	list.Remove(10) // Elimina la primera aparición del dato 10 en la lista.
+//	list.Remover(10) // Elimina la primera aparición del dato 10 en la lista.
 //
 // Parámetros:
-//   - `data`: el dato a eliminar de la lista.
-func (l *LinkedList[T]) Remove(data T) {
-	node := l.Find(data)
-	if node == nil {
+//   - `dato`: el dato a eliminar de la lista.
+func (lista *ListaEnlazada[T]) Remover(dato T) {
+	nodo := lista.Encontrar(dato)
+	if nodo == nil {
 		return
 	}
-	if node == l.head {
-		l.RemoveFirst()
+	if nodo == lista.cabeza {
+		lista.RemoverPrimero()
 		return
 	}
-	current := l.Head()
-	for current.Next() != node {
-		current = current.Next()
+	actual := lista.Cabeza()
+	for actual.Siguiente() != nodo {
+		actual = actual.Siguiente()
 	}
-	current.SetNext(node.Next())
-	if node == l.tail {
-		l.tail = current
+	actual.EstablecerSiguiente(nodo.Siguiente())
+	if nodo == lista.cola {
+		lista.cola = actual
 	}
-	l.size--
+	lista.tamaño--
 }
 
 // String devuelve una representación en cadena de la lista.
@@ -214,19 +214,19 @@ func (l *LinkedList[T]) Remove(data T) {
 //
 // Retorna:
 //   - una representación en cadena de la lista.
-func (l *LinkedList[T]) String() string {
-	if l.IsEmpty() {
-		return "LinkedList: []"
+func (lista *ListaEnlazada[T]) String() string {
+	if lista.EstaVacia() {
+		return "ListaEnlazada: []"
 	}
-	result := "LinkedList: "
-	current := l.Head()
+	resultado := "ListaEnlazada: "
+	actual := lista.Cabeza()
 	for {
-		result += fmt.Sprintf("[%v]", current.Data())
-		if !current.HasNext() {
+		resultado += fmt.Sprintf("[%v]", actual.Dato())
+		if !actual.TieneSiguiente() {
 			break
 		}
-		result += " → "
-		current = current.Next()
+		resultado += " → "
+		actual = actual.Siguiente()
 	}
-	return result
+	return resultado
 }

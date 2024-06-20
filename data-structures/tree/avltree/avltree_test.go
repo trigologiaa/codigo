@@ -239,12 +239,12 @@ func TestAVLTreeIterator(t *testing.T) {
 	avl.Insert(3)
 	avl.Insert(5)
 	avl.Insert(7)
-	iterator := avl.Iterator()
+	iterator := avl.Iterador()
 	expected := []int{1, 2, 3, 4, 5, 6, 7}
 	for _, expVal := range expected {
-		assert.True(t, iterator.HasNext())
-		val, _ := iterator.Next()
+		assert.True(t, iterator.TieneSiguiente())
+		val, _ := iterator.Siguiente()
 		assert.Equal(t, expVal, val)
 	}
-	assert.False(t, iterator.HasNext())
+	assert.False(t, iterator.TieneSiguiente())
 }

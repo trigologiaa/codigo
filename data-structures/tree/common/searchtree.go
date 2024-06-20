@@ -3,7 +3,7 @@ package common
 
 import "github.com/trigologiaa/codigo/data-structures/types"
 
-type SearchTree[T types.Ordered] interface {
+type SearchTree[T types.Ordenado] interface {
 	Insert(k T)
 	Remove(k T)
 	IsEmpty() bool
@@ -12,5 +12,5 @@ type SearchTree[T types.Ordered] interface {
 	Search(k T) bool
 	Clear()
 	String() string
-	Iterator() types.Iterator[T]
+	Iterador() types.Iterador[T]
 }

@@ -5,52 +5,52 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewQueue(t *testing.T) {
-	q := NewQueue[int]()
-	assert.NotNil(t, q)
-	assert.True(t, q.IsEmpty())
+func TestColaNueva(test *testing.T) {
+	cola := NuevaCola[int]()
+	assert.NotNil(test, cola)
+	assert.True(test, cola.EstaVacia())
 }
 
-func TestQueueEnqueue(t *testing.T) {
-	q := NewQueue[int]()
-	q.Enqueue(1)
-	assert.False(t, q.IsEmpty())
+func TestColaAgregarACola(test *testing.T) {
+	cola := NuevaCola[int]()
+	cola.AgregarACola(1)
+	assert.False(test, cola.EstaVacia())
 }
 
-func TestQueueDequeue(t *testing.T) {
-	q := NewQueue[int]()
-	q.Enqueue(1)
-	q.Enqueue(2)
-	v, _ := q.Dequeue()
-	assert.Equal(t, 1, v)
-	v, _ = q.Dequeue()
-	assert.Equal(t, 2, v)
-	assert.True(t, q.IsEmpty())
+func TestColaSacarDeCola(test *testing.T) {
+	cola := NuevaCola[int]()
+	cola.AgregarACola(1)
+	cola.AgregarACola(2)
+	valor, _ := cola.SacarDeCola()
+	assert.Equal(test, 1, valor)
+	valor, _ = cola.SacarDeCola()
+	assert.Equal(test, 2, valor)
+	assert.True(test, cola.EstaVacia())
 }
 
-func TestQueueDequeueOnEmptyQueue(t *testing.T) {
-	q := NewQueue[int]()
-	_, err := q.Dequeue()
-	assert.EqualError(t, err, "cola vacía")
+func TestColaSacarDeColaEnColaVacia(test *testing.T) {
+	cola := NuevaCola[int]()
+	_, err := cola.SacarDeCola()
+	assert.EqualError(test, err, "cola vacía")
 }
 
-func TestQueueFrontOnEmptyQueue(t *testing.T) {
-	q := NewQueue[int]()
-	_, err := q.Front()
-	assert.EqualError(t, err, "cola vacía")
+func TestColaFrenteEnColaVacia(test *testing.T) {
+	cola := NuevaCola[int]()
+	_, err := cola.Frente()
+	assert.EqualError(test, err, "cola vacía")
 }
 
-func TestQueueFront(t *testing.T) {
-	q := NewQueue[int]()
-	q.Enqueue(1)
-	q.Enqueue(2)
-	q.Enqueue(3)
-	v, _ := q.Front()
-	assert.Equal(t, 1, v)
-	q.Dequeue()
-	v, _ = q.Front()
-	assert.Equal(t, 2, v)
-	q.Dequeue()
-	v, _ = q.Front()
-	assert.Equal(t, 3, v)
+func TestColaFrente(test *testing.T) {
+	cola := NuevaCola[int]()
+	cola.AgregarACola(1)
+	cola.AgregarACola(2)
+	cola.AgregarACola(3)
+	valor, _ := cola.Frente()
+	assert.Equal(test, 1, valor)
+	cola.SacarDeCola()
+	valor, _ = cola.Frente()
+	assert.Equal(test, 2, valor)
+	cola.SacarDeCola()
+	valor, _ = cola.Frente()
+	assert.Equal(test, 3, valor)
 }

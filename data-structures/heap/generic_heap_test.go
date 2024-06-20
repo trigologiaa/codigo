@@ -10,28 +10,28 @@ type Persona struct {
 	edad   int
 }
 
-func personasDeMayorAMenorEdad(a Persona, b Persona) int {
-	if a.edad < b.edad {
+func personasDeMayorAMenorEdad(axel Persona, bruno Persona) int {
+	if axel.edad < bruno.edad {
 		return 1
-	} else if a.edad > b.edad {
+	} else if axel.edad > bruno.edad {
 		return -1
 	}
 	return 0
 }
 
-func TestHeapCrearVacio(t *testing.T) {
-	m := NewGenericHeap[Persona](personasDeMayorAMenorEdad)
-	assert.Equal(t, 0, m.Size())
+func TestCrearMonticuloVacio(test *testing.T) {
+	monticulo := NuevoMonticuloGenerico[Persona](personasDeMayorAMenorEdad)
+	assert.Equal(test, 0, monticulo.Tamaño())
 }
 
-func TestHeapRemoveVacio(t *testing.T) {
-	m := NewGenericHeap[Persona](personasDeMayorAMenorEdad)
-	_, err := m.Remove()
-	assert.NotNil(t, err)
+func TestRemoverDeMonticuloVacio(test *testing.T) {
+	monticulo := NuevoMonticuloGenerico[Persona](personasDeMayorAMenorEdad)
+	_, err := monticulo.Remover()
+	assert.NotNil(test, err)
 }
 
-func TestHeapCrearInsertarYExtraer(t *testing.T) {
-	secuenciaDeInsercion := []Persona{
+func TestCrearInsertarYExtraerDeMonticulo(test *testing.T) {
+	secuenciaDeInsercion := []Persona {
 		{"Ana", 44},
 		{"Juan", 29},
 		{"Pedro", 58},
@@ -43,7 +43,7 @@ func TestHeapCrearInsertarYExtraer(t *testing.T) {
 		{"Miguel", 68},
 		{"Laura", 99},
 	}
-	ordenEsperadoDespuesDeInsertar := [][]Persona{
+	ordenEsperadoDespuesDeInsertar := [][]Persona {
 		{{"Ana", 44}},
 		{{"Ana", 44}, {"Juan", 29}},
 		{{"Pedro", 58}, {"Juan", 29}, {"Ana", 44}},
@@ -56,14 +56,14 @@ func TestHeapCrearInsertarYExtraer(t *testing.T) {
 		{{"Laura", 99}, {"Jose", 98}, {"Carlos", 65}, {"Pedro", 58}, {"Miguel", 68}, {"Lucia", 11}, {"Ana", 44}, {"Maria", 2}, {"Sofia", 3}, {"Juan", 29}},
 	}
 	// Verificaciones iniciales
-	m := NewGenericHeap[Persona](personasDeMayorAMenorEdad)
-	assert.Equal(t, 0, m.Size())
-	// Verificaciones a medida que vamos insertando
-	for i := 0; i < len(secuenciaDeInsercion); i++ {
-		m.Insert(secuenciaDeInsercion[i])
-		assert.Equal(t, ordenEsperadoDespuesDeInsertar[i], m.elements)
+	monticulo := NuevoMonticuloGenerico[Persona](personasDeMayorAMenorEdad)
+	assert.Equal(test, 0, monticulo.Tamaño())
+	// Verificaciones axel medida que vamos insertando
+	for indice := 0; indice < len(secuenciaDeInsercion); indice++ {
+		monticulo.Insertar(secuenciaDeInsercion[indice])
+		assert.Equal(test, ordenEsperadoDespuesDeInsertar[indice], monticulo.elementos)
 	}
-	ordenEsperadoDespuesDeEliminar := [][]Persona{
+	ordenEsperadoDespuesDeEliminar := [][]Persona {
 		{{"Jose", 98}, {"Miguel", 68}, {"Carlos", 65}, {"Pedro", 58}, {"Juan", 29}, {"Lucia", 11}, {"Ana", 44}, {"Maria", 2}, {"Sofia", 3}},
 		{{"Miguel", 68}, {"Pedro", 58}, {"Carlos", 65}, {"Sofia", 3}, {"Juan", 29}, {"Lucia", 11}, {"Ana", 44}, {"Maria", 2}},
 		{{"Carlos", 65}, {"Pedro", 58}, {"Ana", 44}, {"Sofia", 3}, {"Juan", 29}, {"Lucia", 11}, {"Maria", 2}},
@@ -75,9 +75,9 @@ func TestHeapCrearInsertarYExtraer(t *testing.T) {
 		{{"Maria", 2}},
 		{},
 	}
-	for i := 0; i < len(secuenciaDeInsercion); i++ {
-		_, err := m.Remove()
-		assert.Equal(t, ordenEsperadoDespuesDeEliminar[i], m.elements)
-		assert.NoError(t, err)
+	for indice := 0; indice < len(secuenciaDeInsercion); indice++ {
+		_, err := monticulo.Remover()
+		assert.Equal(test, ordenEsperadoDespuesDeEliminar[indice], monticulo.elementos)
+		assert.NoError(test, err)
 	}
 }

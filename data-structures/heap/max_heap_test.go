@@ -5,15 +5,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMaxHeapCrearVacio(t *testing.T) {
-	m := NewMaxHeap[int]()
-	assert.Equal(t, 0, m.Size())
+func TestCrearMonticuloDeMaximoVacio(test *testing.T) {
+	monticulo := NuevoMonticuloMaximo[int]()
+	assert.Equal(test, 0, monticulo.Tamaño())
 }
 
-func TestMaxHeapRemoveMaxVacio(t *testing.T) {
-	m := NewMaxHeap[int]()
-	_, err := m.Remove()
-	assert.NotNil(t, err)
+func TestRemoverMaximoDeMonticuloDeMaximoVacio(test *testing.T) {
+	monticulo := NuevoMonticuloMaximo[int]()
+	_, err := monticulo.Remover()
+	assert.NotNil(test, err)
 }
 
 // Gracias a visualgo.net/en/heap
@@ -37,9 +37,9 @@ func TestMaxHeapRemoveMaxVacio(t *testing.T) {
 //
 // Como arreglo:
 // [99, 98, 65, 58, 68, 11, 44, 2, 3, 29].
-func TestMaxHeapCrearInsertarYExtraer(t *testing.T) {
-	secuenciaDeInsercion := []int{44, 29, 58, 2, 98, 11, 65, 3, 68, 99}
-	ordenEsperadoDespuesDeInsertar := [][]int{
+func TestCrearInsertarYExtraerDeMonticuloDeMaximo(test *testing.T) {
+	secuenciaDeInsercion := []int {44, 29, 58, 2, 98, 11, 65, 3, 68, 99}
+	ordenEsperadoDespuesDeInsertar := [][]int {
 		{44},
 		{44, 29},
 		{58, 29, 44},
@@ -52,14 +52,14 @@ func TestMaxHeapCrearInsertarYExtraer(t *testing.T) {
 		{99, 98, 65, 58, 68, 11, 44, 2, 3, 29},
 	}
 	// Verificaciones iniciales
-	m := NewMaxHeap[int]()
-	assert.Equal(t, 0, m.Size())
+	monticulo := NuevoMonticuloMaximo[int]()
+	assert.Equal(test, 0, monticulo.Tamaño())
 	// Verificaciones a medida que vamos insertando
-	for i := 0; i < len(secuenciaDeInsercion); i++ {
-		m.Insert(secuenciaDeInsercion[i])
-		assert.Equal(t, ordenEsperadoDespuesDeInsertar[i], m.elements)
+	for indice := 0; indice < len(secuenciaDeInsercion); indice++ {
+		monticulo.Insertar(secuenciaDeInsercion[indice])
+		assert.Equal(test, ordenEsperadoDespuesDeInsertar[indice], monticulo.elementos)
 	}
-	ordenEsperadoDespuesDeEliminar := [][]int{
+	ordenEsperadoDespuesDeEliminar := [][]int {
 		{98, 68, 65, 58, 29, 11, 44, 2, 3},
 		{68, 58, 65, 3, 29, 11, 44, 2},
 		{65, 58, 44, 3, 29, 11, 2},
@@ -71,9 +71,9 @@ func TestMaxHeapCrearInsertarYExtraer(t *testing.T) {
 		{2},
 		{},
 	}
-	for i := 0; i < len(secuenciaDeInsercion); i++ {
-		_, err := m.Remove()
-		assert.Equal(t, ordenEsperadoDespuesDeEliminar[i], m.elements)
-		assert.NoError(t, err)
+	for indice := 0; indice < len(secuenciaDeInsercion); indice++ {
+		_, err := monticulo.Remover()
+		assert.Equal(test, ordenEsperadoDespuesDeEliminar[indice], monticulo.elementos)
+		assert.NoError(test, err)
 	}
 }

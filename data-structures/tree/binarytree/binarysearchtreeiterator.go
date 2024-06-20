@@ -7,8 +7,8 @@ import (
 )
 
 // BinarySearchTreeIterator es un iterador para recorrer un BinarySearchTree.
-type binarySearchTreeIterator[T types.Ordered] struct {
-	internalStack *stack.Stack[*BinaryNode[T]]
+type binarySearchTreeIterator[T types.Ordenado] struct {
+	internalStack *stack.Pila[*BinaryNode[T]]
 }
 
 // pushLeftNodes apila los nodos izquierdos desde un nodo.
@@ -17,7 +17,7 @@ type binarySearchTreeIterator[T types.Ordered] struct {
 //   - `node` un puntero a un BinaryNode.
 func (it *binarySearchTreeIterator[T]) pushLeftNodes(node *BinaryNode[T]) {
 	for node != nil {
-		it.internalStack.Push(node)
+		it.internalStack.Empujar(node)
 		node = node.left
 	}
 }
@@ -36,7 +36,7 @@ func (it *binarySearchTreeIterator[T]) pushLeftNodes(node *BinaryNode[T]) {
 // Retorna:
 //   - true si hay un siguiente nodo, false en caso contrario.
 func (it *binarySearchTreeIterator[T]) HasNext() bool {
-	return !it.internalStack.IsEmpty()
+	return !it.internalStack.EstaVacia()
 }
 
 // Next devuelve el siguiente dato, respetando el recorrido InOrder.
@@ -53,11 +53,11 @@ func (it *binarySearchTreeIterator[T]) HasNext() bool {
 // Retorna:
 //   - el dato del siguiente nodo.
 func (it *binarySearchTreeIterator[T]) Next() (T, error) {
-	if it.internalStack.IsEmpty() {
+	if it.internalStack.EstaVacia() {
 		var emptyValue T
 		return emptyValue, errors.New("árbol vacío")
 	}
-	node, _ := it.internalStack.Pop()
+	node, _ := it.internalStack.Tirar()
 	if node.right != nil {
 		it.pushLeftNodes(node.right)
 	}

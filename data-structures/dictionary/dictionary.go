@@ -1,5 +1,5 @@
 // Package dictionary proporciona una implementación de un diccionario genérico basado en un map de Go.
-// Expone la estructura Dictionary y sus métodos para manipular un diccionario
+// Expone la estructura Diccionario y sus métodos para manipular un diccionario
 package dictionary
 
 import (
@@ -7,159 +7,159 @@ import (
 	"fmt"
 )
 
-// Dictionary implementa un diccionario genérico basado en un map de Go.
+// Diccionario implementa un diccionario genérico basado en un map de Go.
 // Las claves deben ser de un tipo comparable y los valores pueden ser de cualquier tipo.
-type Dictionary[K comparable, V any] struct {
-	dict map[K]V
+type Diccionario[Clave comparable, Valor any] struct {
+	diccionario map[Clave]Valor
 }
 
-// NewDictionary crea un nuevo diccionario vacío.
+// NuevoDiccionario crea un nuevo diccionario vacío.
 //
 // Uso:
 //
-//	d := dictionary.NewDictionary[int, string]() // Crea un diccionario de enteros a cadenas.
-func NewDictionary[K comparable, V any]() *Dictionary[K, V] {
-	return &Dictionary[K, V]{dict: make(map[K]V)}
+//	Diccionario := dictionary.NuevoDiccionario[int, string]() // Crea un diccionario de enteros a cadenas.
+func NuevoDiccionario[Clave comparable, Valor any]() *Diccionario[Clave, Valor] {
+	return &Diccionario[Clave, Valor]{diccionario: make(map[Clave]Valor)}
 }
 
-// Put inserta el par (key, value) en el Diccionario. Si la `key` existe, reemplaza
+// Insertar inserta el par (clave, valor) en el Diccionario. Si la `clave` existe, reemplaza
 // el par existente; si no existe, el par es agregado al diccionario.
 //
 // Uso:
 //
-//	d.Put(10, "ten") // Agrega el par (10, "ten") al diccionario.
+//	Diccionario.Insertar(10, "ten") // Agrega el par (10, "ten") al diccionario.
 //
 // Parámetros:
 //
-//	`key`: la clave del par a insertar.
-//	`value`: el valor del par a insertar.
-func (d *Dictionary[K, V]) Put(key K, value V) {
-	d.dict[key] = value
+//	`clave`: la clave del par a insertar.
+//	`valor`: el valor del par a insertar.
+func (Diccionario *Diccionario[Clave, Valor]) Insertar(clave Clave, valor Valor) {
+	Diccionario.diccionario[clave] = valor
 }
 
-// Contains verifica si la `key` especificada existe en el diccionario
+// Contiene verifica si la `clave` especificada existe en el diccionario
 //
 // Uso:
 //
-//	if d.Contains(10) {
+//	if Diccionario.Contiene(10) {
 //		fmt.Println("Clave 10 existe.")
 //	}
 //
 // Parámetros:
 //
-//	`key`: la clave a buscar en el diccionario.
+//	`clave`: la clave a buscar en el diccionario.
 //
 // Retorna:
 //
 //	`true` si la clave existe en el diccionario; `false` en caso contrario.
-func (d *Dictionary[K, V]) Contains(key K) bool {
-	_, exists := d.dict[key]
-	return exists
+func (Diccionario *Diccionario[Clave, Valor]) Contiene(clave Clave) bool {
+	_, existe := Diccionario.diccionario[clave]
+	return existe
 }
 
-// Get devuelve el `value` asociado a la `key` específicada.
+// Obtener devuelve el `valor` asociado a la `clave` específicada.
 //
 // Uso:
 //
-//	if value, err := d.Get(10); err != nil {
-//		fmt.Println("Valor asociado a la clave 10:", value)
+//	if valor, err := Diccionario.Obtener(10); err != nil {
+//		fmt.Println("Valor asociado a la clave 10:", valor)
 //	}
 //
 // Parámetros:
 //
-//	`key`: la clave cuyo valor asociado se desea obtener.
+//	`clave`: la clave cuyo valor asociado se desea obtener.
 //
 // Retorna:
 //
-//	El valor asociado a la clave especificada  y nil como error, o el nil type del tipo V
+//	El valor asociado a la clave especificada  y nil como error, o el nil type del tipo Valor
 //	y un error si la clave no existe.
-func (d *Dictionary[K, V]) Get(key K) (V, error) {
-	value, exists := d.dict[key]
-	if !exists {
-		return value, errors.New("clave inexistente")
+func (Diccionario *Diccionario[Clave, Valor]) Obtener(clave Clave) (Valor, error) {
+	valor, existe := Diccionario.diccionario[clave]
+	if !existe {
+		return valor, errors.New("clave inexistente")
 	}
-	return value, nil
+	return valor, nil
 }
 
-// Remove remueve el par asociado a la `key` especificada del diccionario.
+// Remover remueve el par asociado a la `clave` especificada del diccionario.
 //
 // Uso:
 //
-//	d.Remove(10)
+//	Diccionario.Remover(10)
 //
 // Parámetros:
 //
-//	`key`: la clave a remover del diccionario.
-func (d *Dictionary[K, V]) Remove(key K) {
-	delete(d.dict, key)
+//	`clave`: la clave a remover del diccionario.
+func (Diccionario *Diccionario[Clave, Valor]) Remover(clave Clave) {
+	delete(Diccionario.diccionario, clave)
 }
 
-// Size devuelve el tamaño del diccionario.
+// Tamaño devuelve el tamaño del diccionario.
 //
 // Uso:
 //
-//	fmt.Println("Tamaño del diccionario:", d.Size())
+//	fmt.Println("Tamaño del diccionario:", Diccionario.Tamaño())
 //
 // Retorna:
 //
 //	La cantidad de entradas presentes en el diccionario.
-func (d *Dictionary[K, V]) Size() int {
-	return len(d.dict)
+func (Diccionario *Diccionario[Clave, Valor]) Tamaño() int {
+	return len(Diccionario.diccionario)
 }
 
-// Keys devuelve todas las claves del diccionario. Por la naturaleza de los map de Go,
+// Claves devuelve todas las claves del diccionario. Por la naturaleza de los map de Go,
 // las claves no se devuelven en un orden específico. No puede contener duplicados.
 //
 // Uso:
 //
-//	keys := d.Keys()
+//	keys := Diccionario.Claves()
 //
 // Retorna:
 //
 //	Un slice de todas las claves presentes en el diccionario.
-func (d *Dictionary[K, V]) Keys() []K {
-	dictKeys := make([]K, 0, d.Size())
-	for key := range d.dict {
-		dictKeys = append(dictKeys, key)
+func (Diccionario *Diccionario[Clave, Valor]) Claves() []Clave {
+	clavesDiccionario := make([]Clave, 0, Diccionario.Tamaño())
+	for clave := range Diccionario.diccionario {
+		clavesDiccionario = append(clavesDiccionario, clave)
 	}
-	return dictKeys
+	return clavesDiccionario
 }
 
-// Values devuelve todos los valores del diccionario. Por la naturaleza de los map de Go,
+// Valores devuelve todos los valores del diccionario. Por la naturaleza de los map de Go,
 // los valores no se devuelven en un orden específico. Puede contener duplicados.
 //
 // Uso:
 //
-//	values := d.Values()
+//	values := Diccionario.Valores()
 //
 // Retorna:
 //
 //	Un slice de todos los valores presentes en el diccionario.
-func (d *Dictionary[K, V]) Values() []V {
-	dictValues := make([]V, 0, d.Size())
-	for _, value := range d.dict {
-		dictValues = append(dictValues, value)
+func (Diccionario *Diccionario[Clave, Valor]) Valores() []Valor {
+	valoresDiccionario := make([]Valor, 0, Diccionario.Tamaño())
+	for _, valor := range Diccionario.diccionario {
+		valoresDiccionario = append(valoresDiccionario, valor)
 	}
-	return dictValues
+	return valoresDiccionario
 }
 
 // String devuelve la representación en `string` del diccionario.
 //
 // Uso:
 //
-//	fmt.Println(d)
+//	fmt.Println(Diccionario)
 //
 // Retorna:
 //
 //	Una representación en `string` del diccionario.
-func (d *Dictionary[K, V]) String() string {
-	if d.Size() == 0 {
-		return "Dictionary: {}"
+func (Diccionario *Diccionario[Clave, Valor]) String() string {
+	if Diccionario.Tamaño() == 0 {
+		return "Diccionario: {}"
 	}
-	str := "Dictionary: {\n"
-	for key, value := range d.dict {
-		str += fmt.Sprintf("  %v: %v\n", key, value)
+	String := "Diccionario: {\n"
+	for clave, valor := range Diccionario.diccionario {
+		String += fmt.Sprintf("  %v: %v\n", clave, valor)
 	}
-	str += "}"
-	return str
+	String += "}"
+	return String
 }

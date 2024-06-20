@@ -1,78 +1,78 @@
 package list
 
-// LinkedNode representa un nodo de una lista enlazada simple.
-type LinkedNode[T comparable] struct {
-	data T
-	next *LinkedNode[T]
+// NodoEnlazado representa un nodo de una lista enlazada simple.
+type NodoEnlazado[T comparable] struct {
+	dato T
+	siguiente *NodoEnlazado[T]
 }
 
-// NewLinkedListNode crea un nuevo nodo de lista enlazada con el dato especificado.
+// NuevoNodoEnlazado crea un nuevo nodo de lista enlazada con el dato especificado.
 //
 // Uso:
 //
-//	node := list.NewLinkedListNode(10) // Crea un nuevo nodo con el dato 10.
+//	node := list.NuevoNodoEnlazado(10) // Crea un nuevo nodo con el dato 10.
 //
 // Parámetros:
-//   - `data`: el dato a almacenar en el nodo.
-func NewLinkedListNode[T comparable](data T) *LinkedNode[T] {
-	return &LinkedNode[T]{data: data}
+//   - `dato`: el dato a almacenar en el nodo.
+func NuevoNodoEnlazado[T comparable](dato T) *NodoEnlazado[T] {
+	return &NodoEnlazado[T]{dato: dato}
 }
 
-// SetData establece el dato almacenado en el nodo.
+// EstablecerDato establece el dato almacenado en el nodo.
 //
 // Uso:
 //
-//	node.SetData(20) // Establece el dato del nodo a 20.
+//	node.EstablecerDato(20) // Establece el dato del nodo a 20.
 //
 // Parámetros:
-//   - `data`: el dato a almacenar en el nodo.
-func (n *LinkedNode[T]) SetData(data T) {
-	n.data = data
+//   - `dato`: el dato a almacenar en el nodo.
+func (nodo *NodoEnlazado[T]) EstablecerDato(dato T) {
+	nodo.dato = dato
 }
 
-// Data devuelve el dato almacenado en el nodo.
+// Dato devuelve el dato almacenado en el nodo.
 //
 // Uso:
 //
-//	data := node.Data() // Obtiene el dato almacenado en el nodo.
+//	dato := node.Dato() // Obtiene el dato almacenado en el nodo.
 //
 // Retorna:
 //   - el dato almacenado en el nodo.
-func (n *LinkedNode[T]) Data() T {
-	return n.data
+func (nodo *NodoEnlazado[T]) Dato() T {
+	return nodo.dato
 }
 
-// SetNext establece el nodo siguiente al nodo actual.
+// EstablecerSiguiente establece el nodo siguiente al nodo actual.
 //
 // Uso:
 //
-//	node.SetNext(newNode) // Establece el nodo siguiente al nodo actual.
+//	node.EstablecerSiguiente(newNode) // Establece el nodo siguiente al nodo actual.
 //
 // Parámetros:
-//   - `newNext`: el nodo siguiente al nodo actual.
-func (n *LinkedNode[T]) SetNext(newNext *LinkedNode[T]) {
-	n.next = newNext
+//   - `nuevoSiguiente`: el nodo siguiente al nodo actual.
+func (nodo *NodoEnlazado[T]) EstablecerSiguiente(nuevoSiguiente *NodoEnlazado[T]) {
+	nodo.siguiente = nuevoSiguiente
 }
 
-// Next devuelve el nodo siguiente al nodo actual.
+// Siguiente devuelve el nodo siguiente al nodo actual.
 //
 // Uso:
 //
-//	nextNode := node.Next() // Obtiene el nodo siguiente al nodo actual.
-func (n *LinkedNode[T]) Next() *LinkedNode[T] {
-	return n.next
+//	nextNode := node.Siguiente() // Obtiene el nodo siguiente al nodo actual.
+func (nodo *NodoEnlazado[T]) Siguiente() *NodoEnlazado[T] {
+	return nodo.siguiente
 }
 
-// HasNext evalúa si el nodo actual tiene asignado un nodo siguiente.
+// TieneSiguiente evalúa si el nodo actual tiene asignado un nodo siguiente.
 //
 // Uso:
 //
-//	if node.HasNext() {
+//	if node.TieneSiguiente() {
 //		fmt.Println("El nodo tiene un nodo siguiente.")
 //	}
 //
 // Retorna:
 //   - `true` si el nodo tiene un nodo siguiente; `false` en caso contrario.
-func (n *LinkedNode[T]) HasNext() bool {
-	return n.next != nil
+func (nodo *NodoEnlazado[T]) TieneSiguiente() bool {
+	return nodo.siguiente != nil
 }

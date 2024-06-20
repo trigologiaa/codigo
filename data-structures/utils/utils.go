@@ -3,7 +3,7 @@ package utils
 
 import "github.com/trigologiaa/codigo/data-structures/types"
 
-// Compare devuelve
+// Comparar devuelve
 //
 //	-1 si x es menor que y,
 //	 0 si x es igual a y,
@@ -11,9 +11,9 @@ import "github.com/trigologiaa/codigo/data-structures/types"
 //
 // Para tipos de punto flotante, un NaN se considera menor que cualquier valor no-NaN,
 // un NaN se considera igual a un NaN, y -0.0 es igual a 0.0.
-func Compare[T types.Ordered](x, y T) int {
-	xNaN := isNaN(x)
-	yNaN := isNaN(y)
+func Comparar[T types.Ordenado](x, y T) int {
+	xNaN := esNaN(x)
+	yNaN := esNaN(y)
 	if xNaN && yNaN {
 		return 0
 	}
@@ -26,19 +26,19 @@ func Compare[T types.Ordered](x, y T) int {
 	return 0
 }
 
-// isNaN informa si x es un NaN sin requerir el paquete math.
+// esNaN informa si x es un NaN sin requerir el paquete math.
 // Esto siempre devolverá falso si T no es de punto flotante.
-func isNaN[T types.Ordered](x T) bool {
+func esNaN[T types.Ordenado](x T) bool {
 	return x != x
 }
 
-// Min devuelve el menor de dos enteros.
+// Minimo devuelve el menor de dos enteros.
 //
 // Uso:
 //
 //	a := 5
 //	b := 3
-//	utils.Min(a, b)
+//	utils.Minimo(a, b)
 //
 // Parámetros:
 //   - `a` un entero.
@@ -46,20 +46,20 @@ func isNaN[T types.Ordered](x T) bool {
 //
 // Retorna:
 //   - el menor de los dos enteros.
-func Min(a, b int) int {
+func Minimo(a, b int) int {
 	if a < b {
 		return a
 	}
 	return b
 }
 
-// Max devuelve el mayor de dos enteros.
+// Maximo devuelve el mayor de dos enteros.
 //
 // Uso:
 //
 //	a := 5
 //	b := 3
-//	utils.Max(a, b)
+//	utils.Maximo(a, b)
 //
 // Parámetros:
 //   - `a` un entero.
@@ -67,7 +67,7 @@ func Min(a, b int) int {
 //
 // Retorna:
 //   - el mayor de los dos enteros.
-func Max(a, b int) int {
+func Maximo(a, b int) int {
 	if a > b {
 		return a
 	}

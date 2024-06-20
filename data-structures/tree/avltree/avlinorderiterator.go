@@ -6,8 +6,8 @@ import (
 	"github.com/trigologiaa/codigo/data-structures/types"
 )
 
-type AVLInOrderIterator[T types.Ordered] struct {
-	stack *stack.Stack[AVLNode[T]] // pila de nodos
+type AVLInOrderIterador[T types.Ordenado] struct {
+	stack *stack.Pila[AVLNodo[T]] // pila de nodos
 }
 
 // NewAVLInOrderIterator crea un iterador en orden para un árbol AVL.
@@ -22,9 +22,9 @@ type AVLInOrderIterator[T types.Ordered] struct {
 //
 // Retorna:
 //   - un iterador en orden para el árbol AVL.
-func NewAVLInOrderIterator[T types.Ordered](root *AVLNode[T]) *AVLInOrderIterator[T] {
-	iterator := &AVLInOrderIterator[T]{
-		stack: stack.NewStack[AVLNode[T]](),
+func NewAVLInOrderIterator[T types.Ordenado](root *AVLNodo[T]) *AVLInOrderIterador[T] {
+	iterator := &AVLInOrderIterador[T]{
+		stack: stack.NuevaPila[AVLNodo[T]](),
 	}
 	iterator.stackLeftChildren(root)
 	return iterator
@@ -34,9 +34,9 @@ func NewAVLInOrderIterator[T types.Ordered](root *AVLNode[T]) *AVLInOrderIterato
 //
 // Parámetros:
 //   - `node` el nodo a partir del cual se apilarán los nodos hijos izquierdos.
-func (it *AVLInOrderIterator[T]) stackLeftChildren(node *AVLNode[T]) {
+func (it *AVLInOrderIterador[T]) stackLeftChildren(node *AVLNodo[T]) {
 	for node != nil {
-		it.stack.Push(*node)
+		it.stack.Empujar(*node)
 		node = node.getLeft()
 	}
 }
@@ -51,8 +51,8 @@ func (it *AVLInOrderIterator[T]) stackLeftChildren(node *AVLNode[T]) {
 //
 // Retorna:
 //   - `true` si hay más elementos para recorrer, `false` en caso contrario.
-func (it *AVLInOrderIterator[T]) HasNext() bool {
-	return !it.stack.IsEmpty()
+func (it *AVLInOrderIterador[T]) HasNext() bool {
+	return !it.stack.EstaVacia()
 }
 
 // Next devuelve el siguiente elemento del recorrido.
@@ -65,12 +65,12 @@ func (it *AVLInOrderIterator[T]) HasNext() bool {
 //
 // Retorna:
 //   - el siguiente elemento del recorrido.
-func (it *AVLInOrderIterator[T]) Next() (T, error) {
+func (it *AVLInOrderIterador[T]) Next() (T, error) {
 	var data T
-	if it.stack.IsEmpty() {
+	if it.stack.EstaVacia() {
 		return data, errors.New("no hay más elementos")
 	}
-	next, _ := it.stack.Pop()
+	next, _ := it.stack.Tirar()
 	if next.getRight() != nil {
 		it.stackLeftChildren(next.getRight())
 	}

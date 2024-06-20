@@ -9,26 +9,27 @@ import (
 	"github.com/gizak/termui/v3/widgets"
 )
 
-var rendereable = []ui.Drawable{}
-const width = 14
-const height = 6
+var renderizable = []ui.Drawable{}
+const ancho = 14
+const alto = 6
 
 func principal() {
-	var i, j int = 42, 2701
+	var i int = 42
+	var j int = 2701
 	p := &i
 	p2 := p
 	// Agrego para mostrar
-	addVariable("i", &i, 0, 0)
-	addVariable("j", &j, 1, 0)
-	addVariableP("p", &p, 2, 0)
-	addVariableP("p2", &p2, 3, 0)
+	agregarVariable("i", &i, 0, 0)
+	agregarVariable("j", &j, 1, 0)
+	agregarVariableP("p", &p, 2, 0)
+	agregarVariableP("p2", &p2, 3, 0)
 	actualizarConsola()
 	time.Sleep(5 * time.Second)
 	*p = *p * 2
-	addVariable("i", &i, 0, 1)
-	addVariable("j", &j, 1, 1)
-	addVariableP("p", &p, 2, 1)
-	addVariableP("p2", &p2, 3, 1)
+	agregarVariable("i", &i, 0, 1)
+	agregarVariable("j", &j, 1, 1)
+	agregarVariableP("p", &p, 2, 1)
+	agregarVariableP("p2", &p2, 3, 1)
 	actualizarConsola()
 }
 
@@ -50,22 +51,22 @@ func main() {
 	}
 }
 
-func addVariable(name string, direction *int, column int, row int) {
+func agregarVariable(nombre string, direccion *int, columna int, fila int) {
 	pi := widgets.NewParagraph()
-	pi.Text = fmt.Sprint(name, " [", reflect.TypeOf(*direction), "](fg:blue)", "\n", "[", *direction, "](fg:red,mod:bold)", "\n", &*direction)
-	pi.SetRect(column*width, row*height, (column+1)*width, (row+1)*height)
+	pi.Text = fmt.Sprint(nombre, " [", reflect.TypeOf(*direccion), "](fg:blue)", "\n", "[", *direccion, "](fg:red,mod:bold)", "\n", direccion)
+	pi.SetRect(columna*ancho, fila*alto, (columna+1)*ancho, (fila+1)*alto)
 	//pi.Border = false
-	rendereable = append(rendereable, pi)
+	renderizable = append(renderizable, pi)
 }
 
-func addVariableP(name string, direction **int, column int, row int) {
+func agregarVariableP(nombre string, direccion **int, columna int, fila int) {
 	pi := widgets.NewParagraph()
-	pi.Text = fmt.Sprint(name, " [", reflect.TypeOf(*direction), "](fg:blue)", "\n", "[", *direction, "](fg:red,mod:bold)", "\n", direction, "\n", "[", **direction, "](fg:yellow,mod:bold)")
-	pi.SetRect(column*width, row*height, (column+1)*width, (row+1)*height)
+	pi.Text = fmt.Sprint(nombre, " [", reflect.TypeOf(*direccion), "](fg:blue)", "\n", "[", *direccion, "](fg:red,mod:bold)", "\n", direccion, "\n", "[", **direccion, "](fg:yellow,mod:bold)")
+	pi.SetRect(columna*ancho, fila*alto, (columna+1)*ancho, (fila+1)*alto)
 	//pi.Border = false
-	rendereable = append(rendereable, pi)
+	renderizable = append(renderizable, pi)
 }
 
 func actualizarConsola() {
-	ui.Render(rendereable...)
+	ui.Render(renderizable...)
 }

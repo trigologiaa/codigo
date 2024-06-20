@@ -4,10 +4,10 @@ import "fmt"
 
 func main() {
 	a := 10
-	showDuplicate(a)
+	mostrarDuplicado(a)
 	fmt.Println("main.a:", a)
 	fmt.Println("main.&a:", &a)
-	duplicate(&a) // Le envio la direccion
+	duplicar(&a) // Le envio la direccion
 	fmt.Println("main.a:", a)
 	fmt.Println("main.&a:", &a)
 }
@@ -15,15 +15,15 @@ func main() {
 // a no existe
 // b vale a
 // Podemos decir que la funcion es inmutable
-func showDuplicate(b int) {
+func mostrarDuplicado(b int) {
 	b *= 2
-	fmt.Println("showDuplicate.b:", b)
+	fmt.Println("mostrarDuplicado.b:", b)
 }
 
-func duplicate(c *int) {
+func duplicar(c *int) {
 	// Esta funcion es mutable
 	*c *= 2
-	fmt.Println("duplicate.c:", c)
-	fmt.Println("duplicate.*c:", *c)
-	fmt.Println("duplicate.&c:", &c)
+	fmt.Println("duplicar.c:", c)
+	fmt.Println("duplicar.*c:", *c)
+	fmt.Println("duplicar.&c:", &c)
 }

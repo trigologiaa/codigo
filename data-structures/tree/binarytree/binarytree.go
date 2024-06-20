@@ -6,7 +6,7 @@ import (
 	"github.com/trigologiaa/codigo/data-structures/types"
 )
 
-type BinaryTree[T types.Ordered] struct {
+type BinaryTree[T types.Ordenado] struct {
 	root *BinaryNode[T]
 }
 
@@ -21,7 +21,7 @@ type BinaryTree[T types.Ordered] struct {
 //
 // Retorna:
 //   - un puntero a un nuevo BinaryTree.
-func NewBinaryTree[T types.Ordered](data T) *BinaryTree[T] {
+func NewBinaryTree[T types.Ordenado](data T) *BinaryTree[T] {
 	node := NewBinaryNode(data, nil, nil)
 	return &BinaryTree[T]{root: node}
 }
@@ -247,17 +247,17 @@ func (t *BinaryTree[T]) Height() int {
 	return t.root.Height()
 }
 
-// Iterator devuelve un iterador para recorrer el árbol.
+// Iterador devuelve un iterador para recorrer el árbol.
 //
 // Uso:
 //
 //	bt := tree.NewBinaryTree[int](0)
 //	// ...
-//	it := bt.Iterator()
+//	it := bt.Iterador()
 //
 // Retorna:
-//   - un Iterator.
-func (t *BinaryTree[T]) Iterator() types.Iterator[T] {
+//   - un Iterador.
+func (t *BinaryTree[T]) Iterador() types.Iterador[T] {
 	return newBinaryTreeIterator[T](t)
 }
 
@@ -267,9 +267,9 @@ func (t *BinaryTree[T]) Iterator() types.Iterator[T] {
 //   - `bt` un puntero a un BinaryTree.
 //
 // Retorna:
-//   - un Iterator.
-func newBinaryTreeIterator[T types.Ordered](bt *BinaryTree[T]) types.Iterator[T] {
-	it := &binaryTreeIterator[T]{internalStack: stack.NewStack[*BinaryNode[T]]()}
+//   - un Iterador.
+func newBinaryTreeIterator[T types.Ordenado](bt *BinaryTree[T]) types.Iterador[T] {
+	it := &binaryTreeIterator[T]{internalStack: stack.NuevaPila[*BinaryNode[T]]()}
 	if bt.root != nil {
 		it.pushLeftNodes(bt.root)
 	}

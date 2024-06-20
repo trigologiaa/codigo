@@ -6,8 +6,8 @@ import (
 	"github.com/trigologiaa/codigo/data-structures/types"
 )
 
-type AVLLevelIterator[T types.Ordered] struct {
-	queue *queue.Queue[AVLNode[T]] // cola de nodos
+type AVLLevelIterator[T types.Ordenado] struct {
+	queue *queue.Cola[AVLNodo[T]] // cola de nodos
 }
 
 // NewAVLLevelIterator crea un iterador de nivel para un árbol AVL.
@@ -22,12 +22,12 @@ type AVLLevelIterator[T types.Ordered] struct {
 //
 // Retorna:
 //   - un iterador de nivel para el árbol AVL.
-func NewAVLLevelIterator[T types.Ordered](root *AVLNode[T]) *AVLLevelIterator[T] {
+func NewAVLLevelIterator[T types.Ordenado](root *AVLNodo[T]) *AVLLevelIterator[T] {
 	iterator := &AVLLevelIterator[T]{
-		queue: queue.NewQueue[AVLNode[T]](),
+		queue: queue.NuevaCola[AVLNodo[T]](),
 	}
 	if root != nil {
-		iterator.queue.Enqueue(*root)
+		iterator.queue.AgregarACola(*root)
 	}
 	return iterator
 }
@@ -43,7 +43,7 @@ func NewAVLLevelIterator[T types.Ordered](root *AVLNode[T]) *AVLLevelIterator[T]
 // Retorna:
 //   - `true` si hay más elementos para recorrer, `false` en caso contrario.
 func (it *AVLLevelIterator[T]) HasNext() bool {
-	return !it.queue.IsEmpty()
+	return !it.queue.EstaVacia()
 }
 
 // Next devuelve el siguiente elemento del recorrido.
@@ -58,15 +58,15 @@ func (it *AVLLevelIterator[T]) HasNext() bool {
 //   - el siguiente elemento del recorrido.
 func (it *AVLLevelIterator[T]) Next() (T, error) {
 	var data T
-	if it.queue.IsEmpty() {
+	if it.queue.EstaVacia() {
 		return data, errors.New("no hay más elementos")
 	}
-	next, _ := it.queue.Dequeue()
+	next, _ := it.queue.SacarDeCola()
 	if next.getLeft() != nil {
-		it.queue.Enqueue(*next.getLeft())
+		it.queue.AgregarACola(*next.getLeft())
 	}
 	if next.getRight() != nil {
-		it.queue.Enqueue(*next.getRight())
+		it.queue.AgregarACola(*next.getRight())
 	}
 	return next.data, nil
 }

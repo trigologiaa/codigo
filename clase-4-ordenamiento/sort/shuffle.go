@@ -5,9 +5,10 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
-func Shuffle[T constraints.Ordered](items []T) {
-	for i := range items {
+func Shuffle[T constraints.Ordered](elementos []T) {
+	for i := range elementos {
 		j := rand.Intn(i + 1)
-		items[i], items[j] = items[j], items[i]
+		elementos[i] = elementos[j]
+		elementos[j] = elementos[i]
 	}
 }

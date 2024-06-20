@@ -8,11 +8,11 @@ import (
 	"github.com/trigologiaa/codigo/data-structures/types"
 )
 
-type BinarySearchTree[T types.Ordered] struct {
+type BinarySearchTree[T types.Ordenado] struct {
 	root *BinaryNode[T]
 }
 
-// NewBinarySearchTree crea un nuevo BinarySearchTree de tipo Ordered.
+// NewBinarySearchTree crea un nuevo BinarySearchTree de tipo Ordenado.
 //
 // Uso:
 //
@@ -20,7 +20,7 @@ type BinarySearchTree[T types.Ordered] struct {
 //
 // Retorna:
 //   - un puntero a un nuevo BinarySearchTree.
-func NewBinarySearchTree[T types.Ordered]() *BinarySearchTree[T] {
+func NewBinarySearchTree[T types.Ordenado]() *BinarySearchTree[T] {
 	return &BinarySearchTree[T]{root: nil}
 }
 
@@ -259,7 +259,7 @@ func (bst *BinarySearchTree[T]) Size() int {
 //
 // Retorna:
 //   - la cantidad de nodos en el árbol local.
-func size[T types.Ordered](node *BinaryNode[T]) int {
+func size[T types.Ordenado](node *BinaryNode[T]) int {
 	return node.Size()
 }
 
@@ -271,17 +271,17 @@ func (bst *BinarySearchTree[T]) Clear() {
 	bst.root = nil
 }
 
-// Iterator devuelve un iterador para recorrer el árbol.
+// Iterador devuelve un iterador para recorrer el árbol.
 //
 // Uso:
 //
 //	bst := tree.NewBinarySearchTree[int]()
 //	// ...
-//	it := bst.Iterator()
+//	it := bst.Iterador()
 //
 // Retorna:
-//   - un puntero a un Iterator.
-func (bst *BinarySearchTree[T]) Iterator() types.Iterator[T] {
+//   - un puntero a un Iterador.
+func (bst *BinarySearchTree[T]) Iterador() types.Iterador[T] {
 	return newBinarySearchTreeIterator(bst)
 }
 
@@ -291,9 +291,9 @@ func (bst *BinarySearchTree[T]) Iterator() types.Iterator[T] {
 //   - `bst` un puntero a un BinarySearchTree.
 //
 // Retorna:
-//   - un Iterator.
-func newBinarySearchTreeIterator[T types.Ordered](bst *BinarySearchTree[T]) types.Iterator[T] {
-	it := &binarySearchTreeIterator[T]{internalStack: stack.NewStack[*BinaryNode[T]]()}
+//   - un Iterador.
+func newBinarySearchTreeIterator[T types.Ordenado](bst *BinarySearchTree[T]) types.Iterador[T] {
+	it := &binarySearchTreeIterator[T]{internalStack: stack.NuevaPila[*BinaryNode[T]]()}
 	if bst.root != nil {
 		it.pushLeftNodes(bst.root)
 	}

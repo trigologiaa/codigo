@@ -11,9 +11,9 @@ import (
 )
 
 // Parametros de la visualización. Cambiar a gusto
-const size = 7
-const time = 1000
-var items = slice.GenerateNumbersConsecutive(size)
+const tamaño = 7
+const tiempo = 1000
+var elementos = slice.GenerarNumerosConsecutivos(tamaño)
 var p *widgets.Paragraph
 var bc *widgets.BarChart
 
@@ -24,17 +24,17 @@ func main() {
 	defer ui.Close()
 	// Text
 	p = widgets.NewParagraph()
-	p.Text = strings.Trim(strings.Join(strings.Split(fmt.Sprint(items), " "), ", "), "[]")
+	p.Text = strings.Trim(strings.Join(strings.Split(fmt.Sprint(elementos), " "), ", "), "[]")
 	p.SetRect(0, 0, 100, 5)
 	// Barchart
 	bc = widgets.NewBarChart()
-	bc.Data = items
-	bc.SetRect(0, 5, size*2+2, size+5+3)
+	bc.Data = elementos
+	bc.SetRect(0, 5, tamaño * 2 + 2, tamaño + 5 + 3)
 	bc.BarWidth = 1
-	bc.BarColors = []ui.Color{ui.ColorWhite}
-	bc.NumStyles = []ui.Style{ui.NewStyle(ui.ColorYellow)}
+	bc.BarColors = []ui.Color {ui.ColorWhite}
+	bc.NumStyles = []ui.Style {ui.NewStyle(ui.ColorYellow)}
 	ui.Render(bc)
-	render()
+	renderizar()
 	uiEvents := ui.PollEvents()
 	for {
 		e := <-uiEvents
@@ -43,39 +43,39 @@ func main() {
 			return
 		case "1":
 			p.Text = "Ordenando por inserción"
-			sort.InsertionWithSleep(items, time, render, color)
+			sort.InsertionWithSleep(elementos, tiempo, renderizar, color)
 			p.Text = "Esperando..."
-			render()
+			renderizar()
 		case "2":
 			p.Text = "Ordenando por selección"
-			sort.SelectionWithSleep(items, time, render, color)
+			sort.SelectionWithSleep(elementos, tiempo, renderizar, color)
 			p.Text = "Esperando..."
-			render()
+			renderizar()
 		case "s":
-			sort.Shuffle(items)
-			render()
+			sort.Shuffle(elementos)
+			renderizar()
 		}
 	}
 }
 
-func render() {
+func renderizar() {
 	ui.Clear()
 	ui.Render(p, bc)
 }
 
-func color(ccolors ...int) {
-	colorList := []ui.Color{ui.ColorRed, ui.ColorBlue, ui.ColorYellow}
-	colors := getSameColor()
-	for i, value := range ccolors {
-		colors[value] = colorList[i%len(colorList)]
+func color(Colores ...int) {
+	listaDeColores := []ui.Color{ui.ColorRed, ui.ColorBlue, ui.ColorYellow}
+	colores := obtenerMismoColor()
+	for indice, valor := range Colores {
+		colores[valor] = listaDeColores[indice%len(listaDeColores)]
 	}
-	bc.BarColors = colors
+	bc.BarColors = colores
 }
 
-func getSameColor() []ui.Color {
-	colors := make([]ui.Color, size)
-	for i := range colors {
-		colors[i] = ui.ColorGreen
+func obtenerMismoColor() []ui.Color {
+	colores := make([]ui.Color, tamaño)
+	for indice := range colores {
+		colores[indice] = ui.ColorGreen
 	}
-	return colors
+	return colores
 }

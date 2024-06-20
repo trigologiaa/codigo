@@ -5,15 +5,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMinHeapCrearVacio(t *testing.T) {
-	m := NewMinHeap[int]()
-	assert.Equal(t, 0, m.Size())
+func TestCrearMonticuloDeMinimoVacio(test *testing.T) {
+	monticulo := NuevoMonticuloMinimo[int]()
+	assert.Equal(test, 0, monticulo.Tamaño())
 }
 
-func TestMinHeapRemoveMaxVacio(t *testing.T) {
-	m := NewMinHeap[int]()
-	_, err := m.Remove()
-	assert.NotNil(t, err)
+func TestRemoveMaximoDeMonticuloDeMinimoVacio(test *testing.T) {
+	monticulo := NuevoMonticuloMinimo[int]()
+	_, err := monticulo.Remover()
+	assert.NotNil(test, err)
 }
 
 // Gracias a visualgo.net/en/heap
@@ -37,9 +37,9 @@ func TestMinHeapRemoveMaxVacio(t *testing.T) {
 //
 // Como arreglo:
 // [02, 03, 11, 29, 98, 58, 65, 44, 68, 99].
-func TestMinHeapCrearInsertarYExtraer(t *testing.T) {
-	secuenciaDeInsercion := []int{44, 29, 58, 2, 98, 11, 65, 3, 68, 99}
-	ordenEsperadoDespuesDeInsertar := [][]int{
+func TestCrearInsertarYExtraerDeMonticuloDeMinimo(test *testing.T) {
+	secuenciaDeInsercion := []int {44, 29, 58, 2, 98, 11, 65, 3, 68, 99}
+	ordenEsperadoDespuesDeInsertar := [][]int {
 		{44},
 		{29, 44},
 		{29, 44, 58},
@@ -52,14 +52,14 @@ func TestMinHeapCrearInsertarYExtraer(t *testing.T) {
 		{2, 3, 11, 29, 98, 58, 65, 44, 68, 99},
 	}
 	// Verificaciones iniciales
-	m := NewMinHeap[int]()
-	assert.Equal(t, 0, m.Size())
+	monticulo := NuevoMonticuloMinimo[int]()
+	assert.Equal(test, 0, monticulo.Tamaño())
 	// Verificaciones a medida que vamos insertando
-	for i := 0; i < len(secuenciaDeInsercion); i++ {
-		m.Insert(secuenciaDeInsercion[i])
-		assert.Equal(t, ordenEsperadoDespuesDeInsertar[i], m.elements)
+	for indice := 0; indice < len(secuenciaDeInsercion); indice++ {
+		monticulo.Insertar(secuenciaDeInsercion[indice])
+		assert.Equal(test, ordenEsperadoDespuesDeInsertar[indice], monticulo.elementos)
 	}
-	ordenEsperadoDespuesDeEliminar := [][]int{
+	ordenEsperadoDespuesDeEliminar := [][]int {
 		{3, 29, 11, 44, 98, 58, 65, 99, 68},
 		{11, 29, 58, 44, 98, 68, 65, 99},
 		{29, 44, 58, 99, 98, 68, 65},
@@ -71,9 +71,9 @@ func TestMinHeapCrearInsertarYExtraer(t *testing.T) {
 		{99},
 		{},
 	}
-	for i := 0; i < len(secuenciaDeInsercion); i++ {
-		_, err := m.Remove()
-		assert.Equal(t, ordenEsperadoDespuesDeEliminar[i], m.elements)
-		assert.NoError(t, err)
+	for indice := 0; indice < len(secuenciaDeInsercion); indice++ {
+		_, err := monticulo.Remover()
+		assert.Equal(test, ordenEsperadoDespuesDeEliminar[indice], monticulo.elementos)
+		assert.NoError(test, err)
 	}
 }
