@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"codigo/data-structures/dictionary"
-	"codigo/data-structures/list"
-	"codigo/data-structures/set"
+	"github.com/trigologiaa/codigo/data-structures/dictionary"
+	"github.com/trigologiaa/codigo/data-structures/list"
+	"github.com/trigologiaa/codigo/data-structures/set"
 )
 
 // Escribir una función que reciba como parámetro un diccionario cuyas claves son títulos de libros (strings)

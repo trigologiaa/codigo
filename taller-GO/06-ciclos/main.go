@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/trigologiaa/codigo/tree/main/taller-GO/06-ciclos/ciclos"
+	"github.com/trigologiaa/codigo/taller-GO/06-ciclos/ciclos"
 )
 
 func main() {

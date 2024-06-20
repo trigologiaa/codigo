@@ -3,8 +3,8 @@ package heap
 
 import (
 	"errors"
-	"github.com/trigologiaa/codigo/tree/main/data-structures/types"
-	"github.com/trigologiaa/codigo/tree/main/data-structures/utils"
+	"github.com/trigologiaa/codigo/data-structures/types"
+	"github.com/trigologiaa/codigo/data-structures/utils"
 )
 
 type Heap[T any] struct {

@@ -3,8 +3,8 @@ package binarytree
 import (
 	"fmt"
 	"strings"
-	"github.com/trigologiaa/codigo/tree/main/data-structures/types"
-	"github.com/trigologiaa/codigo/tree/main/data-structures/utils"
+	"github.com/trigologiaa/codigo/data-structures/types"
+	"github.com/trigologiaa/codigo/data-structures/utils"
 )
 
 // BinaryNode implementa el tipo BinaryNode con dos campos de tipo

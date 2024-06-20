@@ -2,8 +2,8 @@ package common
 
 import (
 	"testing"
-	"github.com/trigologiaa/codigo/tree/main/data-structures/tree/avltree"
-	"github.com/trigologiaa/codigo/tree/main/data-structures/tree/binarytree"
+	"github.com/trigologiaa/codigo/data-structures/tree/avltree"
+	"github.com/trigologiaa/codigo/data-structures/tree/binarytree"
 )
 
 // Verifica si BinarySearchTree implementa la interfaz SearchTree.

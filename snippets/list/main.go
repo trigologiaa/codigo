@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"data-structures/list"
+	"github.com/trigologiaa/codigo/data-structures/list"
 )
 
 func main() {

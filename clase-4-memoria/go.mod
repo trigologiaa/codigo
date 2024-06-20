@@ -1,4 +1,4 @@
-module github.com/trigologiaa/codigo/tree/main/clase-4-memoria
+module github.com/trigologiaa/codigo/clase-4-memoria
 
 go 1.22.2
 

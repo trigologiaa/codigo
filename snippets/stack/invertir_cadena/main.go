@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"codigo/data-structures/stack"
+	"github.com/trigologiaa/codigo/data-structures/stack"
 )
 
 func InvertirCadena(cadena string) string {

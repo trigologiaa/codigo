@@ -1,7 +1,7 @@
 // Package common provee la interfaz SearchTree para los árboles de búsqueda.
 package common
 
-import "github.com/trigologiaa/codigo/tree/main/data-structures/types"
+import "github.com/trigologiaa/codigo/data-structures/types"
 
 type SearchTree[T types.Ordered] interface {
 	Insert(k T)

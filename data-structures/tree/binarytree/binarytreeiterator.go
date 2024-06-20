@@ -2,8 +2,8 @@ package binarytree
 
 import (
 	"errors"
-	"github.com/trigologiaa/codigo/tree/main/data-structures/stack"
-	"github.com/trigologiaa/codigo/tree/main/data-structures/types"
+	"github.com/trigologiaa/codigo/data-structures/stack"
+	"github.com/trigologiaa/codigo/data-structures/types"
 )
 
 // BinaryTreeIterator es un iterador para recorrer un BinaryTree.

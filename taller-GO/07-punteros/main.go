@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/trigologiaa/codigo/tree/main/taller-GO/07-punteros/punteros"
+	"github.com/trigologiaa/codigo/taller-GO/07-punteros/punteros"
 )
 
 func main() {

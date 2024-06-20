@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"codigo/data-structures/stack"
+	"github.com/trigologiaa/codigo/data-structures/stack"
 )
 
 func main() {

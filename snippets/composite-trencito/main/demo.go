@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"snippets/composite-trencito/composite"
+	"github.com/trigologiaa/codigo/snippets/composite-trencito/composite"
 )
 
 func main() {

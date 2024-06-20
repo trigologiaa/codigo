@@ -1,4 +1,4 @@
-module github.com/trigologiaa/codigo/tree/main/clase-4-ordenamiento
+module github.com/trigologiaa/codigo/clase-4-ordenamiento
 
 go 1.22.2
 

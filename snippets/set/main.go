@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	sl "codigo/data-structures/set"
+	sl "github.com/trigologiaa/codigo/data-structures/set"
 )
 
 func main() {

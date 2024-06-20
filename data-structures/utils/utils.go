@@ -1,7 +1,7 @@
 // Package utils provee funciones de utilidad para el resto de los paquetes.
 package utils
 
-import "github.com/trigologiaa/codigo/tree/main/data-structures/types"
+import "github.com/trigologiaa/codigo/data-structures/types"
 
 // Compare devuelve
 //

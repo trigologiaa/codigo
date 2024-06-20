@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"time"
-	"github.com/trigologiaa/codigo/tree/main/taller-GO/05-condicionales/condicionales"
+	"github.com/trigologiaa/codigo/taller-GO/05-condicionales/condicionales"
 )
 
 func main() {

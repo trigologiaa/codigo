@@ -1,3 +1,3 @@
-module github.com/trigologiaa/codigo/tree/main/snippets
+module github.com/trigologiaa/codigo/snippets
 
 go 1.22.2

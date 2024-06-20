@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"codigo/data-structures/queue"
+	"github.com/trigologiaa/codigo/data-structures/queue"
 )
 
 func main() {

@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"codigo/data-structures/dictionary"
-	"codigo/data-structures/set"
-	"codigo/data-structures/stack"
+	"github.com/trigologiaa/codigo/data-structures/dictionary"
+	"github.com/trigologiaa/codigo/data-structures/set"
+	"github.com/trigologiaa/codigo/data-structures/stack"
 )
 
 func main() {

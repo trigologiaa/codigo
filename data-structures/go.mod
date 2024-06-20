@@ -1,4 +1,4 @@
-module github.com/trigologiaa/codigo/tree/main/data-structures
+module github.com/trigologiaa/codigo/data-structures
 
 go 1.22.2
 

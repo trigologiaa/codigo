@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/trigologiaa/codigo/tree/main/taller-GO/04-funciones/genericas"
-	"github.com/trigologiaa/codigo/tree/main/taller-GO/04-funciones/matematicas"
+	"github.com/trigologiaa/codigo/taller-GO/04-funciones/genericas"
+	"github.com/trigologiaa/codigo/taller-GO/04-funciones/matematicas"
 )
 
 func main() {
